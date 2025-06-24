@@ -28,10 +28,33 @@ export const headerInner = style({
 
 export const logo = style({
     flexShrink: 0,
+    display: 'inline-flex',
     fontSize: 20,
     fontWeight: 'bold',
     color: '#333',
     textDecoration: 'none'
+});
+
+export const gnbNav = style({
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: 10
+});
+
+export const gnbNavLink = style({
+    display: 'inline-flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: '32px',
+    padding: '0 12px',
+    fontSize: '14px',
+    fontWeight: '500',
+    borderRadius: '6px',
+    ':hover': {
+        backgroundColor: vars.color.hoverBg,
+    }
 });
 
 export const joinNav = style({

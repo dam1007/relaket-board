@@ -256,11 +256,67 @@ export const textarea = style({
     border: `1px solid ${vars.color.border}`,
 });
 
+// select
+export const select = style({
+    width: '110px',
+    height: '32px',
+    padding: '0 12px',
+    borderRadius: '7px',
+    border: `1px solid ${vars.color.border}`,
+    fontSize: '14px',
+    appearance: 'none',
+    WebkitAppearance: 'none',
+    MozAppearance: 'none',
+    // OAppearance: 'none',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'calc(100% - 12px) 50%',
+    backgroundSize: '16px',
+    backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-chevron-down size-4 opacity-50' aria-hidden='true'%3E%3Cpath d='m6 9 6 6 6-6'%3E%3C/path%3E%3C/svg%3E")`,
+});
+
+// 검색박스
+export const searchBox = style({
+    display: 'inline-flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    gap: '3px',
+});
+
+export const searchBoxInput = style({
+    display: 'inline-flex',
+    justifyContent: 'flex-start',
+    width: '100%',
+    height: '32px',
+    backgroundColor: 'white',
+    borderRadius: '7px',
+    border: `1px solid ${vars.color.border}`,
+    padding: '4px 12px',
+    boxSizing: 'border-box',
+});
+
+export const searchBoxButton = style({
+    flexShrink: '0',
+    display: 'inline-flex',
+    justifyContent: 'flex-start',
+    width: 'fit-content',
+    height: '32px',
+    padding: '4px 12px',
+    backgroundColor: 'white',
+    borderRadius: '7px',
+    border: `1px solid ${vars.color.border}`,
+    boxSizing: 'border-box',
+    fontWeight: '500',
+    ':hover': {
+        background: vars.color.hoverBg, 
+    }
+});
+
 // 테이블 > 열
 export const tableColWrap = style({
 });
 
 export const tableCol = style({
+    tableLayout: 'fixed',
     width: '100%',
 });
 
@@ -270,6 +326,7 @@ export const tableColTh = style({
     padding: '10px',
     fontWeight: '500',
     textAlign: 'left',
+    backgroundColor: vars.color.bg,
 });
 
 export const tableColTd = style({
@@ -292,6 +349,7 @@ export const tableRowWrap = style({
 
 export const tableRow = style({
     width: '100%',
+    borderTop: `1px solid ${vars.color.border}`,
 });
 
 export const tableRowTh = style({
@@ -301,6 +359,7 @@ export const tableRowTh = style({
     fontWeight: '500',
     textAlign: 'left',
     verticalAlign: 'middle',
+    backgroundColor: vars.color.bg,
 });
 
 export const tableRowThLast = style({
@@ -346,7 +405,32 @@ export const paginationNum = style({
     }
 });
 
+// 페이지 타이틀
+export const pageTitle = style({
+    fontSize: '32px',
+    fontWeight: '600',
+    marginBottom: '30px',
+});
+
 // 텍스트 관련
 export const blue = style({
     color: vars.color.blue,
+});
+
+export const underline = style({
+    textDecoration: 'underline',
+});
+
+export const hoverUnderline = style({
+    ':hover': {
+        textDecoration: 'underline',
+    }
+});
+
+// 말줄임표(1줄)
+export const ellipsisOneLine = style({
+    display: 'block',
+    whiteSpace: 'nowrap',
+    textOverflow: 'ellipsis',
+    overflow: 'hidden',
 });

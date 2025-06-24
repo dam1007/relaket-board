@@ -12,10 +12,10 @@ export default function Header() {
     return (
         <header className={styles.header}>
             <div className={styles.headerInner}>
-                <h1 className={styles.logo}>
-                    <Link href="/">홈</Link>
-                    <Link href="/board/list">목록</Link>
-                </h1>
+                <nav className={styles.gnbNav}>
+                    <Link href="/" className={styles.gnbNavLink}>홈</Link>
+                    <Link href="/board/list" className={styles.gnbNavLink}>게시판</Link>
+                </nav>
                 <nav className={styles.joinNav}>
                     <Link className={button({type: 'white', size: 'medium'})} href="/member/login">로그인</Link>
                     <Link className={button({type: 'primary', size: 'medium'})} href="/member/join">회원가입</Link>

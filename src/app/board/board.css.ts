@@ -12,7 +12,7 @@ export const writeBoxHeader = style({
     alignItems: 'center',
     gap: '15px',
     flexWrap: 'nowrap',
-    padding: '13px 25px',
+    padding: '18px 25px',
     borderBottom: `1px solid ${vars.color.border}`,
 });
 
@@ -40,12 +40,11 @@ export const writeBoxFileWrap = style({
     justifyContent: 'flex-start',
     alignItems: 'center',
     flexWrap: 'nowrap',
-    gap: '20px',
-    padding: '13px 25px',
+    gap: '40px',
+    padding: '18px 25px',
     borderTop: `1px solid ${vars.color.border}`,
 });
 
 export const writeBoxFileTitle = style({
-    padding: '13px 25px',
-    borderTop: `1px solid ${vars.color.border}`,
+    fontWeight: '500'
 });
