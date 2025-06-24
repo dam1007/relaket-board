@@ -4,7 +4,7 @@ import * as member from '@/app/member/member.css';
 import InputText from '@/components/InputText/InputText';
 import { pageTitle, blue, button, inputWrap } from '@/styles/components.css';
 
-export default function page() {
+export default function Page() {
     return (
         <section className={member.memberBox}>
             <div className={member.memberFormWrap}>

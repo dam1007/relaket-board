@@ -1,9 +1,9 @@
 // 게시판 상세
 import Link from "next/link";
 import * as board from "../board.css";
-import { hoverUnderline,buttonWrapRight, button } from '@/styles/components.css';
+import { hoverUnderline, buttonWrapRight, button } from '@/styles/components.css';
 
-export default function page() {
+export default function Page() {
     return (
         <>
             <div className={board.writeBox}>

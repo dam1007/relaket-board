@@ -4,7 +4,7 @@ import * as member from '@/app/member/member.css';
 import { button, buttonWrapCenter } from '@/styles/components.css';
 import { IoCheckmarkCircle } from "react-icons/io5";
 
-export default function page() {
+export default function Page() {
     return (
         <section className={member.joinEndDescWrap}>
             <IoCheckmarkCircle style={{width: '250px', height: '250px', marginBottom: '20px'}} />
