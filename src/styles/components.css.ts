@@ -1,6 +1,39 @@
-// import { style } from "@vanilla-extract/css";
+import { style } from "@vanilla-extract/css";
 import { recipe } from "@vanilla-extract/recipes";
 import { vars } from "./global.css";
+
+// 버튼 wrap
+export const buttonWrapLeft = style({
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    flexWrap: 'nowrap',
+    gap: '8px',
+});
+
+export const buttonWrapBetween = style({
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexWrap: 'nowrap',
+    gap: '8px',
+});
+
+export const buttonWrapCenter = style({
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexWrap: 'nowrap',
+    gap: '8px',
+});
+
+export const buttonWrapRight = style({
+    display: 'flex',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    flexWrap: 'nowrap',
+    gap: '8px',
+});
 
 // 버튼
 export const button = recipe({
@@ -75,18 +108,37 @@ export const button = recipe({
                     textDecoration: 'underline',
                 }
             },
-            arrow: {
+            arrowPrev: {
                 flexShrink: '0',
                 width: '36px',
                 height: '36px',
                 background: 'white', 
                 color: vars.color.primary, 
                 borderColor: vars.color.border,
+                borderRadius: '7px',
                 backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-chevron-right'%3E%3Cpath d='m9 18 6-6-6-6'%3E%3C/path%3E%3C/svg%3E")`,
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: '16px',
                 backgroundPosition: 'center',
-                boxShadow: '0 4px 4px rgba(0,0,0,0.1)',
+                boxShadow: '0 -2px 2px rgba(0,0,0,0.1)',
+                ':hover': {
+                    backgroundColor: vars.color.hoverBg,
+                },
+                transform: 'rotate(180deg)'
+            },
+            arrowNext: {
+                flexShrink: '0',
+                width: '36px',
+                height: '36px',
+                background: 'white', 
+                color: vars.color.primary, 
+                borderColor: vars.color.border,
+                borderRadius: '7px',
+                backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' class='lucide lucide-chevron-right'%3E%3Cpath d='m9 18 6-6-6-6'%3E%3C/path%3E%3C/svg%3E")`,
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: '16px',
+                backgroundPosition: 'center',
+                boxShadow: '0 2px 2px rgba(0,0,0,0.1)',
                 ':hover': {
                     backgroundColor: vars.color.hoverBg,
                 }
@@ -133,14 +185,10 @@ export const button = recipe({
         size: {
             small: {fontSize: '12px', padding: '4px 8px'},
             medium: {height: '32px', fontSize: '14px', padding: '6px 12px', borderRadius: '7px',},
-            large: {fontSize: '18px', padding: '12px 24px', borderRadius: '8px',},
-            full: {width: '100%', height: '42px', fontSize: '16px', padding: '6px 12px', borderRadius: '7px',},
+            large: {height: '42px', fontSize: '16px', padding: '8px 20px', borderRadius: '8px',},
+            full: {width: '100%', height: '48px', fontSize: '16px', padding: '6px 12px', borderRadius: '7px',},
         }
     },
-    defaultVariants: {
-        type: 'primary',
-        size: 'medium',
-    }
 });
 
 // 정렬
@@ -176,7 +224,129 @@ export const flex = recipe({
                 justifyContent: 'center',
                 alignItems: 'center',
             },
+            end_start: {
+                flexWrap: 'wrap',
+                justifyContent: 'flex-end',
+                alignItems: 'flex-start',
+            },
+            end_center: {
+                flexWrap: 'wrap',
+                justifyContent: 'flex-end',
+                alignItems: 'center',
+            },
         }
     }
 });
 
+// input wrap
+export const inputWrap = style({
+    margin: '15px 0',
+    ':first-of-type': {
+        margin: '0 0 15px',
+    },
+    ':last-of-type': {
+        margin: '15px 0 0',
+    }
+});
+
+// textarea
+export const textarea = style({
+    width: '100%',
+    borderRadius: '7px',
+    border: `1px solid ${vars.color.border}`,
+});
+
+// 테이블 > 열
+export const tableColWrap = style({
+});
+
+export const tableCol = style({
+    width: '100%',
+});
+
+export const tableColTh = style({
+    background: 'white',
+    borderBottom: `1px solid ${vars.color.border}`,
+    padding: '10px',
+    fontWeight: '500',
+    textAlign: 'left',
+});
+
+export const tableColTd = style({
+    background: 'white',
+    borderBottom: `1px solid ${vars.color.border}`,
+    padding: '10px',
+    fontWeight: '400',
+});
+
+export const tableEmptyList = style({
+    padding: '16px 0',
+    textAlign: 'center',
+    color: vars.color.gray666,
+    borderBottom: 'none',
+});
+
+// 테이블 > 행
+export const tableRowWrap = style({
+});
+
+export const tableRow = style({
+    width: '100%',
+});
+
+export const tableRowTh = style({
+    background: 'white',
+    borderBottom: `1px solid ${vars.color.border}`,
+    padding: '10px',
+    fontWeight: '500',
+    textAlign: 'left',
+    verticalAlign: 'middle',
+});
+
+export const tableRowThLast = style({
+    borderBottom: 'none',
+});
+
+export const tableRowTd = style({
+    background: 'white',
+    borderBottom: `1px solid ${vars.color.border}`,
+    padding: '10px',
+    fontWeight: '400',
+});
+
+export const tableRowTdLast = style({
+    borderBottom: 'none',
+});
+
+// 페이지네이션
+export const pagination = style({
+    display: 'flex',
+    justifyContent: 'center', 
+    alignItems: 'center',
+    flexWrap: 'nowrap',
+    gap: '6px',
+    marginTop: '30px',
+});
+
+export const paginationNum = style({
+    flexShrink: '0',
+    display: 'inline-flex',
+    justifyContent: 'center', 
+    alignItems: 'center',
+    flexWrap: 'nowrap',
+    width: '36px',
+    height: '36px',
+    selectors: {
+        '&.active': {
+            fontWeight: '600',
+        },
+        '&:hover': {
+            textDecoration: 'underline',
+        }
+    }
+});
+
+// 텍스트 관련
+export const blue = style({
+    color: vars.color.blue,
+});

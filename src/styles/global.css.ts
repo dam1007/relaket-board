@@ -35,6 +35,19 @@ globalStyle(
         boxSizing: 'border-box',
     }
 );
+export const vars = createGlobalTheme(':root', {
+    color: {
+        primary: '#18181B',
+        secondary: '#f4f4f5',
+        black: '#09090B',
+        gray: '#71717A',
+        gray666: '#666',
+        red: '#DC2626',
+        border: '#e4e4e7',
+        hoverBg: '#f4f4f5',
+        blue: '#0072f5',
+    }
+});
 
 globalStyle('ol, ul', {
     listStyle: 'none',
@@ -52,18 +65,21 @@ globalStyle('form', {
     width: '100%',
 });
 
-globalStyle('table', {
-    borderCollapse: 'collapse',
-    borderSpacing: 0,
-});
-
 globalStyle('input, button, textarea', {
     borderRadius: 0,
     border: 'none',
+    boxSizing: 'border-box',
+    fontFamily: 'var(--font-noto-sans-kr), var(--font-roboto)',
 });
 
 globalStyle('button', {
     cursor: 'pointer',
+});
+
+globalStyle('textarea', {
+    width: '100%',
+    resize: 'none',
+    padding: '12px',
 });
 
 globalStyle('img, fieldset', {
@@ -75,6 +91,16 @@ globalStyle('a', {
     textDecoration: 'none',
 });
 
+globalStyle('table', {
+    tableLayout: 'auto',
+    borderSpacing: 'unset',
+});
+
+globalStyle('caption', {
+    fontSize: '0',
+    visibility: 'hidden',
+});
+
 globalStyle('.blind', {
     position: 'absolute',
     clip: 'rect(0 0 0 0)',
@@ -82,17 +108,4 @@ globalStyle('.blind', {
     height: '1px',
     margin: '-1px',
     overflow: 'hidden',
-});
-
-export const vars = createGlobalTheme(':root', {
-    color: {
-        primary: '#18181B',
-        secondary: '#f4f4f5',
-        black: '#09090B',
-        gray: '#71717A',
-        gray666: '#666',
-        red: '#DC2626',
-        border: '#e4e4e7',
-        hoverBg: '#f4f4f5',
-    }
 });

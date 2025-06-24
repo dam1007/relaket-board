@@ -1,5 +1,5 @@
-// inputText
-import * as component from './InputText.css';
+// inputText (text, number, password, email)
+import * as styles from './InputText.css';
 
 type InputTextProps = {
     type: string;
@@ -12,8 +12,8 @@ type InputTextProps = {
 export default function InputText({type, name, id, label, placeholder}: InputTextProps) {
     return (
         <>
-            <label htmlFor={id} className={component.inputLabel}>{label}</label>
-            <input type={type} name={name} id={id} className={component.input} placeholder={placeholder} />
+            <label htmlFor={id} className={styles.inputLabel}>{label}</label>
+            <input type={type} name={name} id={id} className={styles.input} placeholder={placeholder} />
         </>
     );
 };

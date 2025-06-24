@@ -20,3 +20,9 @@ globalStyle('.member_wrapper', {
     backgroundColor: 'rgba(250, 250, 250)'
 });
 
+globalStyle('.board_wrapper', {
+    minHeight: 'calc(100vh - 64px)',
+    padding: '120px 0 0',
+    backgroundColor: 'white'
+});
+

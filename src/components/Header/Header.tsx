@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import Link from 'next/link';
 import * as styles from './Header.css'
 import { button } from '@/styles/components.css';
@@ -13,7 +13,8 @@ export default function Header() {
         <header className={styles.header}>
             <div className={styles.headerInner}>
                 <h1 className={styles.logo}>
-                    <Link href="/">Relaket Board</Link>
+                    <Link href="/">홈</Link>
+                    <Link href="/board/list">목록</Link>
                 </h1>
                 <nav className={styles.joinNav}>
                     <Link className={button({type: 'white', size: 'medium'})} href="/member/login">로그인</Link>
