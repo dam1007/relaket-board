@@ -9,11 +9,6 @@ globalStyle('.inner', {
     margin: '0 auto',
 });
 
-globalStyle('.main_title', {
-    fontSize: '32px',
-    fontWeight: '600',
-});
-
 globalStyle('.member_wrapper', {
     minHeight: 'calc(100vh - 64px)',
     padding: '120px 0 0',
@@ -22,7 +17,7 @@ globalStyle('.member_wrapper', {
 
 globalStyle('.board_wrapper', {
     minHeight: 'calc(100vh - 64px)',
-    padding: '120px 0 0',
+    padding: '100px 0 0',
     backgroundColor: 'white'
 });
 

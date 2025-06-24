@@ -1,12 +1,13 @@
-// 글 작성
+// 글 작성/수정
 import Link from "next/link";
-import { tableRow, tableRowTh, tableRowTd, textarea, buttonWrapCenter, button } from "@/styles/components.css";
+import { pageTitle, tableRow, tableRowTh, tableRowTd, textarea, buttonWrapRight, button } from "@/styles/components.css";
 import InputText from "@/components/InputText/InputText";
 import InputFile from "@/components/InputFile/InputFile";
 
 export default function page() {
     return (
         <div className="inner">
+            <h2 className={pageTitle}>글쓰기</h2>
             <form action="" name="">
                 <table className={tableRow}>
                     <caption>글 작성</caption>
@@ -36,7 +37,7 @@ export default function page() {
                     </tbody>
                 </table>
             </form>
-            <div className={buttonWrapCenter} style={{marginTop: '30px', gap: '10px'}}>
+            <div className={buttonWrapRight} style={{marginTop: '30px', gap: '10px'}}>
                 <Link href={'/board/list'} className={button({type: 'white', size: 'large'})}>목록</Link>
                 <button type="button" className={button({type: 'primary', size: 'large'})}>등록</button>
             </div>

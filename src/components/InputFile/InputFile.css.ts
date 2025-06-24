@@ -20,5 +20,6 @@ export const InputFile = style({
         fontSize: '14px',
         fontWeight: '500',
         margin: '0',
+        padding: '0 6px 0 0',
     }
 });

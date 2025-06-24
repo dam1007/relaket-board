@@ -20,7 +20,6 @@ export const memberFormWrap = style({
     justifyContent: 'center',
     alignItems: 'center',
     flexWrap: 'nowrap',
-    gap: '30px',
     width: '100%',
     padding: '64px 80px 70px',
 });
@@ -32,7 +31,7 @@ export const loginDescWrap = style({
     alignItems: 'center',
     flexWrap: 'nowrap',
     gap: '8px',
-    marginTop: '10px',
+    marginTop: '40px',
 });
 
 export const loginDesc = style({

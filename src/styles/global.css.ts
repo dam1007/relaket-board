@@ -1,4 +1,5 @@
 import { globalStyle, createGlobalTheme } from '@vanilla-extract/css';
+import { select } from '@/styles/components.css';
 
 globalStyle('html, body', {
     overflowX: 'hidden',
@@ -46,6 +47,7 @@ export const vars = createGlobalTheme(':root', {
         border: '#e4e4e7',
         hoverBg: '#f4f4f5',
         blue: '#0072f5',
+        bg: '#f8f8f8',
     }
 });
 
@@ -80,6 +82,10 @@ globalStyle('textarea', {
     width: '100%',
     resize: 'none',
     padding: '12px',
+});
+
+globalStyle('select::-ms-expand', {
+    display: 'none',
 });
 
 globalStyle('img, fieldset', {
