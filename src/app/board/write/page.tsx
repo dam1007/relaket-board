@@ -1,13 +1,20 @@
 // 글 작성/수정
+'use client'
+
 import Link from "next/link";
+import { useSearchParams } from 'next/navigation'
 import { pageTitle, tableRow, tableRowTh, tableRowTd, textarea, buttonWrapRight, button } from "@/styles/components.css";
-import InputText from "@/components/InputText/InputText";
+import * as InputText from '@/components/InputText/InputText.css';
 import InputFile from "@/components/InputFile/InputFile";
 
-export default function page() {
+export default function Page() {
+    const searchParams = useSearchParams();
+    const query = searchParams.get('type');
+    console.log(query);
+
     return (
         <div className="inner">
-            <h2 className={pageTitle}>글쓰기</h2>
+            <h2 className={pageTitle}>등록/수정</h2>
             <form action="" name="">
                 <table className={tableRow}>
                     <caption>글 작성</caption>
@@ -19,13 +26,13 @@ export default function page() {
                         <tr>
                             <th className={tableRowTh}>제목</th>
                             <td className={tableRowTd}>
-                                <InputText type={'text'} name={''} id={''} label={''} placeholder={''} />
+                                <input type={'text'} name={''} id={''} className={InputText.input} value={''} />
                             </td>
                         </tr>
                         <tr>
                             <th className={tableRowTh}>내용</th>
                             <td className={tableRowTd}>
-                                <textarea name="" id="" className={textarea} rows={10} />
+                                <textarea name="" id="" className={textarea} rows={10} value={''} />
                             </td>
                         </tr>
                         <tr>
@@ -39,7 +46,9 @@ export default function page() {
             </form>
             <div className={buttonWrapRight} style={{marginTop: '30px', gap: '10px'}}>
                 <Link href={'/board/list'} className={button({type: 'white', size: 'large'})}>목록</Link>
-                <button type="button" className={button({type: 'primary', size: 'large'})}>등록</button>
+                <button type="button" className={button({type: 'primary', size: 'large'})}>
+                    {query !== 'update' ? '등록' : '수정'}
+                </button>
             </div>
         </div>
     );

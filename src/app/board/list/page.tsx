@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { flex, button, tableCol, tableColTh, tableColTd, tableEmptyList, searchBox, searchBoxInput, searchBoxButton, select, ellipsisOneLine, hoverUnderline } from '@/styles/components.css';
 import Pagination from '@/components/Pagination/Pagination';
 
-export default function page() {
+export default function Page() {
     // 임시
     const totalPages = 7;
     
