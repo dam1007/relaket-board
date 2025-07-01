@@ -16,7 +16,7 @@ export default function Page() {
     return (
         <div className="inner">
             <h2 className={pageTitle}>등록/수정</h2>
-            <form action={writePostAction} method="POST" encType="multipart/form-data">
+            <form action={writePostAction}>
                 <table className={tableRow}>
                     <caption>글 작성</caption>
                     <colgroup>
