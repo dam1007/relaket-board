@@ -3,27 +3,32 @@
 import Link from 'next/link';
 import { button } from '@/styles/components.css';
 import { pagination, paginationNum } from '@/styles/components.css';
-import { usePathname, useSearchParams } from 'next/navigation';
 
-export default function Pagination({ totalPages }: { totalPages: number }) {
-    const pathname = usePathname();
-    const searchParams = useSearchParams();
-    const currentPage = Number(searchParams.get('page'));
-    const pageNumArray = [1, 2, 3, 4, 5];
+export default function Pagination({ totalPages, currentPage, basePath }: { totalPages: number, currentPage: number, basePath: string }) {
+    if (totalPages <= 1) return null;
+    const pageNumArray = Array.from({ length: totalPages }, (_, i) => i + 1);
 
     return (
         <nav className={pagination}>
-            <Link href={`${pathname}?page=${currentPage-1}`} className={button({type: 'arrowPrev'})}></Link>
+            <Link
+                href={`${basePath}?page=${Math.max(currentPage - 1, 1)}`}
+                className={button({ type: 'arrowPrev' })}
+                aria-disabled={currentPage === 1}
+            ></Link>
             {pageNumArray.map((number) => (
-                <Link 
-                    href={`${pathname}?page=${number}`} 
-                    className={`${paginationNum} ${number === currentPage ? 'active': null}`} 
+                <Link
+                    href={`${basePath}?page=${number}`}
+                    className={`${paginationNum} ${number === currentPage ? 'active' : ''}`}
                     key={number}
                 >
                     {number}
                 </Link>
             ))}
-            <Link href={`${pathname}?page=${currentPage+1}`} className={button({type: 'arrowNext'})}></Link>
+            <Link
+                href={`${basePath}?page=${Math.min(currentPage + 1, totalPages)}`}
+                className={button({ type: 'arrowNext' })}
+                aria-disabled={currentPage === totalPages}
+            ></Link>
         </nav>
     );
-};
+}
