@@ -66,7 +66,7 @@ export default async function Page() {
                 </tbody>
             </table>
             <div className={flex({type: 'end_start'})}>
-                <Link href={'/board/write'} className={`${button({type: 'primary', size: 'medium'})}`} style={{marginBottom: '30px'}}>글쓰기</Link>
+                <Link href={'/board/write'} className={`${button({type: 'primary', size: 'medium'})}`} style={{marginTop: '30px'}}>글쓰기</Link>
             </div>
             <Pagination totalPages={totalPages} />
         </>
