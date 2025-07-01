@@ -7,13 +7,25 @@ type InputTextProps = {
     id: string;
     label: string;
     placeholder: string;
+    required?: boolean;
+    defaultValue?: string;
+    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-export default function InputText({type, name, id, label, placeholder}: InputTextProps) {
+export default function InputText({type, name, id, label, placeholder, required, defaultValue, onChange}: InputTextProps) {
     return (
         <>
             <label htmlFor={id} className={styles.inputLabel}>{label}</label>
-            <input type={type} name={name} id={id} className={styles.input} placeholder={placeholder} />
+            <input 
+                type={type} 
+                name={name} 
+                id={id} 
+                className={styles.input} 
+                placeholder={placeholder} 
+                required={required} 
+                defaultValue={defaultValue}
+                onChange={onChange}
+            />
         </>
     );
 };
