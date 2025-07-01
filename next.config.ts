@@ -5,6 +5,7 @@ const withVanillaExtract = createVanillaExtractPlugin();
 
 const nextConfig: NextConfig = {
   /* config options here */
+  serverExternalPackages: ['knex'], // 외부 패키지 추가
 };
 
 export default withVanillaExtract(nextConfig);

@@ -2,11 +2,13 @@
 import Link from 'next/link';
 import { flex, button, tableCol, tableColTh, tableColTd, tableEmptyList, searchBox, searchBoxInput, searchBoxButton, select, ellipsisOneLine, hoverUnderline } from '@/styles/components.css';
 import Pagination from '@/components/Pagination/Pagination';
+import knex from '@/lib/knex';
 
-export default function Page() {
-    // 임시
-    const totalPages = 7;
-    
+export default async function Page() {
+    // DB에서 게시글 목록 조회
+    const posts = await knex('relaket_post').select('*').orderBy('id', 'desc');
+    const totalPages = 1; // 페이지네이션 미구현, 추후 개선 가능
+
     return (
         <>
             <div className={flex({type: 'end_center'})} style={{gap: '4px', marginBottom: '20px'}}>
@@ -41,24 +43,26 @@ export default function Page() {
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td className={tableColTd}>1</td>
-                        <td className={tableColTd}>
-                            <Link href={'/board/detail'} className={`${ellipsisOneLine} ${hoverUnderline}`} style={{width: '90%'}}>
-                                testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest
-                                testtesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttesttest
-                            </Link>
-                        </td>
-                        <td className={tableColTd}>
-                            <span>0000-00-00</span>
-                        </td>
-                        <td className={tableColTd}>
-                            <span>0</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td className={tableEmptyList} colSpan={4}>게시물이 없습니다.</td>
-                    </tr>
+                    {posts.length > 0 ? posts.map((post, idx) => (
+                        <tr key={post.id}>
+                            <td className={tableColTd}>{posts.length - idx}</td>
+                            <td className={tableColTd}>
+                                <Link href={`/board/detail?id=${post.id}`} className={`${ellipsisOneLine} ${hoverUnderline}`} style={{width: '90%'}}>
+                                    {post.title}
+                                </Link>
+                            </td>
+                            <td className={tableColTd}>
+                                <span>{post.created_at?.toISOString().slice(0, 10) ?? ''}</span>
+                            </td>
+                            <td className={tableColTd}>
+                                <span>{post.like_count ?? 0}</span>
+                            </td>
+                        </tr>
+                    )) : (
+                        <tr>
+                            <td className={tableEmptyList} colSpan={4}>게시물이 없습니다.</td>
+                        </tr>
+                    )}
                 </tbody>
             </table>
             <div className={flex({type: 'end_start'})}>

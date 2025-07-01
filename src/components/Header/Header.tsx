@@ -1,15 +1,11 @@
-'use client'
-
-import Image from 'next/image';
-import { useState } from 'react';
 import Link from 'next/link';
 import * as styles from './Header.css'
 import { button } from '@/styles/components.css';
-import { headerAvatar, avatarImage } from "../Avatar/Avatar.css";
-import profileImage from '../../../public/default_profile.png'
+import { getCurrentUser } from '@/lib/auth';
+import UserMenu from './UserMenu';
 
-export default function Header() {
-    const [toggleAvatar, setToggleAvatar] = useState(false);
+export default async function Header() {
+    const user = await getCurrentUser();
 
     return (
         <header className={styles.header}>
@@ -19,32 +15,16 @@ export default function Header() {
                     <Link href="/board/list" className={styles.gnbNavLink}>게시판</Link>
                 </nav>
                 <nav className={styles.joinNav}>
-                    <Link className={button({type: 'white', size: 'medium'})} href="/member/login">로그인</Link>
-                    <Link className={button({type: 'primary', size: 'medium'})} href="/member/join">회원가입</Link>
-                    <div className={styles.myMenu}>
-                        <figure className={headerAvatar} onClick={() => {setToggleAvatar(value => !value)}}>
-                            {/* <img className={avatarImage} src={''} alt={'프로필'} /> */}
-                            <Image className={avatarImage} src={profileImage} alt={'프로필'} />
-                        </figure>
-                        {toggleAvatar ? 
-                        <ul className={styles.myMenuList}>
-                            <li className={`${styles.myMenuItem} ${styles.userName}`}>
-                                계정명
-                                <span className={styles.userMail}>이메일</span>
-                            </li>
-                            <li className={styles.myMenuItem}>
-                                <Link className={styles.myMenuLink} href="">정보수정</Link>
-                            </li>
-                            <li className={`${styles.myMenuItem} ${styles.seperate}`}>
-                                <Link className={styles.myMenuLink} href="/member/logout">로그아웃</Link>
-                            </li>
-                        </ul>
-                        : 
-                        null
-                        }
-                    </div>
+                    {user ? (
+                        <UserMenu user={user} />
+                    ) : (
+                        <>
+                            <Link className={button({type: 'white', size: 'medium'})} href="/member/login">로그인</Link>
+                            <Link className={button({type: 'primary', size: 'medium'})} href="/member/join">회원가입</Link>
+                        </>
+                    )}
                 </nav>
             </div>
         </header>
     );
-};
+}
