@@ -11,7 +11,6 @@ export const input = style({
     border: `1px solid ${vars.color.border}`,
     padding: '4px 12px',
     boxSizing: 'border-box',
-    // boxShadow: '1px 1px 3px rgba(0,0,0,0.1)',
 });
 
 export const inputLabel = style({
@@ -19,5 +18,5 @@ export const inputLabel = style({
     fontSize: '14px',
     fontWeight: '500',
     color: vars.color.black,
-    marginBottom: '8px',
+    marginBottom: '6px',
 });

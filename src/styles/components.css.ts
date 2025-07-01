@@ -240,12 +240,12 @@ export const flex = recipe({
 
 // input wrap
 export const inputWrap = style({
-    margin: '15px 0',
+    margin: '20px 0',
     ':first-of-type': {
-        margin: '0 0 15px',
+        margin: '0 0 20px',
     },
     ':last-of-type': {
-        margin: '15px 0 0',
+        margin: '20px 0 0',
     }
 });
 

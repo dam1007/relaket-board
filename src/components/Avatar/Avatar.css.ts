@@ -17,10 +17,6 @@ export const headerAvatar = style({
     width: '30px',
     height: '30px',
     cursor: 'pointer',
-    /* ':hover': {
-        boxShadow: '2px 3px 2px rgba(0,0,0,0.2)',
-        transition: 'all 0.4s ease',
-    } */
 });
 
 export const avatarImage = style({

@@ -11,7 +11,6 @@ import { writePostAction } from './actions';
 export default function Page() {
     const searchParams = useSearchParams();
     const query = searchParams.get('type');
-    console.log(query);
 
     return (
         <div className="inner">
