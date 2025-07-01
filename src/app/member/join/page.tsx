@@ -24,6 +24,9 @@ export default function Page() {
                     <div className={inputWrap}>
                         <InputText type={'email'} name={'userEmail'} id={'userEmail'} label={'이메일'} placeholder={''} />
                     </div>
+                    <div className={inputWrap}>
+
+                    </div>
                     <button type="submit" className={button({type: 'primary', size: 'full'})} style={{marginTop: '30px'}}>가입하기</button>
                 </form>
             </div>

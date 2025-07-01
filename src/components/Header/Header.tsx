@@ -1,10 +1,12 @@
 'use client'
 
+import Image from 'next/image';
 import { useState } from 'react';
 import Link from 'next/link';
 import * as styles from './Header.css'
 import { button } from '@/styles/components.css';
 import { headerAvatar, avatarImage } from "../Avatar/Avatar.css";
+import profileImage from '../../../public/default_profile.png'
 
 export default function Header() {
     const [toggleAvatar, setToggleAvatar] = useState(false);
@@ -21,7 +23,8 @@ export default function Header() {
                     <Link className={button({type: 'primary', size: 'medium'})} href="/member/join">회원가입</Link>
                     <div className={styles.myMenu}>
                         <figure className={headerAvatar} onClick={() => {setToggleAvatar(value => !value)}}>
-                            <img className={avatarImage} src={'https://placehold.co/30'} alt={'프로필'} />
+                            {/* <img className={avatarImage} src={''} alt={'프로필'} /> */}
+                            <Image className={avatarImage} src={profileImage} alt={'프로필'} />
                         </figure>
                         {toggleAvatar ? 
                         <ul className={styles.myMenuList}>
