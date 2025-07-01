@@ -6,6 +6,7 @@ import { useSearchParams } from 'next/navigation'
 import { pageTitle, tableRow, tableRowTh, tableRowTd, textarea, buttonWrapRight, button } from "@/styles/components.css";
 import * as InputText from '@/components/InputText/InputText.css';
 import InputFile from "@/components/InputFile/InputFile";
+import { writePostAction } from './actions';
 
 export default function Page() {
     const searchParams = useSearchParams();
@@ -15,7 +16,7 @@ export default function Page() {
     return (
         <div className="inner">
             <h2 className={pageTitle}>등록/수정</h2>
-            <form action="" name="">
+            <form action={writePostAction} method="POST" encType="multipart/form-data">
                 <table className={tableRow}>
                     <caption>글 작성</caption>
                     <colgroup>
@@ -26,13 +27,13 @@ export default function Page() {
                         <tr>
                             <th className={tableRowTh}>제목</th>
                             <td className={tableRowTd}>
-                                <input type={'text'} name={''} id={''} className={InputText.input} value={''} />
+                                <input type={'text'} name={'title'} className={InputText.input} required />
                             </td>
                         </tr>
                         <tr>
                             <th className={tableRowTh}>내용</th>
                             <td className={tableRowTd}>
-                                <textarea name="" id="" className={textarea} rows={10} value={''} />
+                                <textarea name="content" className={textarea} rows={10} required />
                             </td>
                         </tr>
                         <tr>
@@ -43,13 +44,13 @@ export default function Page() {
                         </tr>
                     </tbody>
                 </table>
+                <div className={buttonWrapRight} style={{marginTop: '30px', gap: '10px'}}>
+                    <Link href={'/board/list'} className={button({type: 'white', size: 'large'})}>목록</Link>
+                    <button type="submit" className={button({type: 'primary', size: 'large'})}>
+                        {query !== 'update' ? '등록' : '수정'}
+                    </button>
+                </div>
             </form>
-            <div className={buttonWrapRight} style={{marginTop: '30px', gap: '10px'}}>
-                <Link href={'/board/list'} className={button({type: 'white', size: 'large'})}>목록</Link>
-                <button type="button" className={button({type: 'primary', size: 'large'})}>
-                    {query !== 'update' ? '등록' : '수정'}
-                </button>
-            </div>
         </div>
     );
 };
