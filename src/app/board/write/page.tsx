@@ -7,11 +7,16 @@ import { pageTitle, tableRow, tableRowTh, tableRowTd, textarea, buttonWrapRight,
 import * as InputText from '@/components/InputText/InputText.css';
 import InputFile from "@/components/InputFile/InputFile";
 import { writePostAction } from './actions';
+import dynamic from 'next/dynamic';
+
+const MyEditor = dynamic(() => import('@/components/MyEditor'), {
+    ssr: false,
+    loading: () => <p>에디터 로딩 중...</p>,
+});
 
 export default function Page() {
     const searchParams = useSearchParams();
     const query = searchParams.get('type');
-    console.log(query);
 
     return (
         <div className="inner">
@@ -33,7 +38,8 @@ export default function Page() {
                         <tr>
                             <th className={tableRowTh}>내용</th>
                             <td className={tableRowTd}>
-                                <textarea name="content" className={textarea} rows={10} required />
+                                {/* <textarea name="content" className={textarea} rows={10} required /> */}
+                                <MyEditor />
                             </td>
                         </tr>
                         <tr>
