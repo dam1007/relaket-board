@@ -7,17 +7,19 @@ import type { Editor as TinyMCEEditor } from 'tinymce';
 interface MyEditorProps {
     initialValue?: string;
     onChange?: (content: string) => void;
+    name: string;
 }
 
-const MyEditor: React.FC<MyEditorProps> = ({ initialValue = '', onChange }) => {
+const MyEditor: React.FC<MyEditorProps> = ({ initialValue, name, onChange }) => {
     const handleEditorChange = (content: string, editor: TinyMCEEditor) => {
         onChange?.(content);
     };
 
     return (
         <Editor
-            apiKey="8vpzfyed5egwfle263ov9hyaxlok8l6p7mbtec1yieih4k4g"
-            value={initialValue}
+            apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
+            value={initialValue ? initialValue : ''}
+            textareaName={name}
             onEditorChange={handleEditorChange}
             init={{
                 height: 400,

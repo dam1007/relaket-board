@@ -6,7 +6,7 @@ import { hoverUnderline, buttonWrapRight, button } from '@/styles/components.css
 import knex from '@/lib/knex';
 import { notFound } from 'next/navigation';
 import LikeButton from './LikeButton';
-
+import DOMPurify from 'isomorphic-dompurify';
 interface DetailProps {
   searchParams: Promise<{ id?: string }>;
 }
@@ -32,7 +32,7 @@ export default async function Page({ searchParams }: DetailProps) {
         </div>
         <div className={board.writeBoxBody}>
           <div className={board.writeBoxTextWrap}>
-            <p>{post.content}</p>
+            <div dangerouslySetInnerHTML={{__html: DOMPurify.sanitize((post.content).toString())}}></div>
           </div>
           {files.length > 0 && (
             <dl className={board.writeBoxFileWrap}>

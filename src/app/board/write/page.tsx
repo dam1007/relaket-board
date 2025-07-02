@@ -39,7 +39,7 @@ export default function Page() {
                             <th className={tableRowTh}>내용</th>
                             <td className={tableRowTd}>
                                 {/* <textarea name="content" className={textarea} rows={10} required /> */}
-                                <MyEditor />
+                                <MyEditor name="content" />
                             </td>
                         </tr>
                         <tr>
