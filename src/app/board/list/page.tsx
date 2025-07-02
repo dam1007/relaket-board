@@ -59,7 +59,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
                         <option value="content">내용</option>
                     </select>
                     <input type="text" name="keyword" className={searchBoxInput} placeholder="검색어를 입력해주세요." defaultValue={keyword} />
-                    <select name="sort" className={select} style={{ width: '90px' }} defaultValue={sort}>
+                    <select name="sort" className={select} style={{ flexShrink: '0', width: '90px' }} defaultValue={sort}>
                         <option value="">최신순</option>
                         <option value="like">인기순</option>
                     </select>
@@ -106,7 +106,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
                 </tbody>
             </table>
             <div className={flex({ type: 'end_start' })}>
-                <Link href={'/board/write'} className={`${button({ type: 'primary', size: 'medium' })}`} style={{ marginBottom: '30px' }}>글쓰기</Link>
+                <Link href={'/board/write'} className={`${button({ type: 'primary', size: 'medium' })}`} style={{ marginTop: '30px' }}>글쓰기</Link>
             </div>
             <Pagination totalPages={totalPages} currentPage={pageNum} basePath={basePathWithQuery} />
         </>
