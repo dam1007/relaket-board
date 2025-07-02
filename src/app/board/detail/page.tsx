@@ -8,19 +8,20 @@ import { notFound } from 'next/navigation';
 import LikeButton from './LikeButton';
 
 interface DetailProps {
-  searchParams: { id?: string };
+  searchParams: Promise<{ id?: string }>;
 }
 
 export default async function Page({ searchParams }: DetailProps) {
-  const id = Number(searchParams?.id);
-  if (!id) return notFound();
+  const { id } = await searchParams;
+  const numId = Number(id);
+  if (!numId) return notFound();
 
   // 게시글 조회
-  const post = await knex('relaket_post').where({ id }).first();
+  const post = await knex('relaket_post').where({ id: numId }).first();
   if (!post) return notFound();
 
   // 첨부파일 조회
-  const files = await knex('relaket_file').where({ post_id: id });
+  const files = await knex('relaket_file').where({ post_id: numId });
 
   return (
     <>
