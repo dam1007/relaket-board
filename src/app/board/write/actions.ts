@@ -5,12 +5,17 @@ import { redirect } from 'next/navigation';
 import path from 'path';
 import fs from 'fs/promises';
 import crypto from 'crypto';
+import { getSession } from '@/lib/redis';
 
 export async function writePostAction(formData: FormData) {
   const title = formData.get('title') as string;
   const content = formData.get('content') as string;
-  // 실제 서비스라면 로그인한 user_id를 세션에서 가져와야 함 (여기선 예시로 1)
-  const user_id = 1;
+  // 실제 서비스라면 로그인한 user_id를 세션에서 가져와야 함
+  const loginUser = await getSession('user');
+  if (!loginUser) {
+    throw new Error('로그인 필요');
+  }
+  const user_id = loginUser.userId;
 
   // 게시글 저장
   const [postId] = await knex('relaket_post').insert({

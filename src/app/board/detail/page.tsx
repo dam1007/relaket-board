@@ -7,6 +7,8 @@ import knex from '@/lib/knex';
 import { notFound } from 'next/navigation';
 import LikeButton from './LikeButton';
 import DOMPurify from 'isomorphic-dompurify';
+import { getSession } from '@/lib/redis';
+
 interface DetailProps {
   searchParams: Promise<{ id?: string }>;
 }
@@ -22,6 +24,12 @@ export default async function Page({ searchParams }: DetailProps) {
 
   // 첨부파일 조회
   const files = await knex('relaket_file').where({ post_id: numId });
+
+  // 현재 로그인 유저 정보 조회
+  const loginUser = await getSession('user');
+  const isOwner = loginUser && post.user_id === loginUser.userId;
+
+  console.log(loginUser.userId, post.user_id);
 
   return (
     <>
@@ -53,8 +61,12 @@ export default async function Page({ searchParams }: DetailProps) {
       </div>
       <div className={buttonWrapRight} style={{marginTop: '30px', gap: '10px'}}>
         <Link href={'/board/list'} className={button({type: 'white', size: 'large'})}>목록</Link>
-        <Link href={`/board/write?type=update&id=${post.id}`} className={button({type: 'primary', size: 'large'})}>수정</Link>
-        <button type="button" className={button({type: 'primary', size: 'large'})}>삭제</button>
+        {isOwner && (
+          <>
+            <Link href={`/board/write?type=update&id=${post.id}`} className={button({type: 'primary', size: 'large'})}>수정</Link>
+            <button type="button" className={button({type: 'primary', size: 'large'})}>삭제</button>
+          </>
+        )}
       </div>
     </>
   );
