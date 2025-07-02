@@ -54,6 +54,7 @@ export default async function Page({ searchParams }: DetailProps) {
       <div className={buttonWrapRight} style={{marginTop: '30px', gap: '10px'}}>
         <Link href={'/board/list'} className={button({type: 'white', size: 'large'})}>목록</Link>
         <Link href={`/board/write?type=update&id=${post.id}`} className={button({type: 'primary', size: 'large'})}>수정</Link>
+        <button type="button" className={button({type: 'primary', size: 'large'})}>삭제</button>
       </div>
     </>
   );
