@@ -30,9 +30,13 @@ const MyEditor: React.FC<MyEditorProps> = ({ initialValue, name, onChange }) => 
                     'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
                 ],
                 toolbar:
-                    'undo redo | formatselect | bold italic underline | image | \
+                    'undo redo | formatselect | fontsize | bold italic underline | forecolor backcolor | lineheight | image | \
                     alignleft aligncenter alignright alignjustify | \
                     bullist numlist outdent indent | removeformat | help ',
+                font_size_formats: '8pt 10pt 12pt 14pt 16pt 18pt 24pt 36pt 48pt',
+                line_height_formats: '1 1.2 1.4 1.6 2',
+                color_cols: 10,
+                color_cols_background: 3,
                 images_upload_url: '/api/upload', // 이미지 업로드용 서버 엔드포인트
                 automatic_uploads: true,
                 images_upload_handler: (blobInfo, success, failure) => {
