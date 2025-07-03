@@ -9,6 +9,7 @@
     "lint": "next lint",
     "test": "jest",
     "format": "prettier --write .",
+    "pre-commit-lint": "NODE_OPTIONS=--max_old_space_size=4096 lint-staged",
     "prepare": "husky"
   },
   "dependencies": {
@@ -33,7 +34,7 @@
       "prettier --write",
       "eslint --fix"
     ],
-    "*": "prettier --write"
+    "*.{json,css,scss,md,html,yml,yaml}": "prettier --write --ignore-path .gitignore --ignore-path .prettierignore"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
