@@ -58,7 +58,7 @@ export default async function Page({ searchParams }: DetailProps) {
                 </div>
             </div>
             <div style={{ margin: '20px 0', textAlign: 'right' }}>
-                <LikeButton postId={post.id} initialCount={post.like_count ?? 0} />
+                <LikeButton postId={post.id} initialCount={post.like_count ?? 0} isLoggedIn={!!loginUser} userId={loginUser?.userId} />
             </div>
             <div className={buttonWrapRight} style={{ marginTop: '30px', gap: '10px' }}>
                 <Link href={'/board/list'} className={button({ type: 'white', size: 'large' })}>목록</Link>
