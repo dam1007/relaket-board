@@ -3,9 +3,10 @@ import Link from 'next/link';
 import { flex, button, tableCol, tableColTh, tableColTd, tableEmptyList, searchBox, searchBoxInput, searchBoxButton, select, ellipsisOneLine, hoverUnderline } from '@/styles/components.css';
 import Pagination from '@/components/Pagination/Pagination';
 import knex from '@/lib/knex';
+import SearchForm from './SearchForm';
 
 export default async function Page({ searchParams }: { searchParams: Promise<{ page?: string; keyword?: string; type?: string; sort?: string }> }) {
-    const { page, keyword = '', type = '', sort = '' } = await searchParams;
+    const { page, keyword = '', type = '', sort = 'new' } = await searchParams;
     const pageNum = Math.max(Number(page) || 1, 1);
     const pageSize = 10;
 
@@ -26,8 +27,15 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
     // 정렬 조건
     if (sort === 'like') {
         query = query.orderBy('like_count', 'desc').orderBy('id', 'desc');
+    } else if (sort === 'view_count') {
+        query = query.orderBy('view_count', 'desc').orderBy('id', 'desc');
+    } else if (sort === 'comment_count') {
+        query = query.orderBy('comment_count', 'desc').orderBy('id', 'desc');
+    } else if (sort === 'old') {
+        query = query.orderBy('id', 'asc');
     } else {
-        query = query.orderBy('id', 'desc'); // 최신순(기본)
+        // 최신순(기본)
+        query = query.orderBy('id', 'desc');
     }
 
     // 전체 게시글 수
@@ -52,32 +60,17 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
     return (
         <>
             <div className={flex({ type: 'end_center' })} style={{ gap: '4px', marginBottom: '20px' }}>
-                <form className={searchBox} method="GET" action="/board/list" style={{ display: 'flex', gap: '4px' }}>
-                    <select name="type" className={select} style={{ flexShrink: '0', width: '90px' }} defaultValue={type}>
-                        <option value="">전체</option>
-                        <option value="title">제목</option>
-                        <option value="content">내용</option>
-                    </select>
-                    <input type="text" name="keyword" className={searchBoxInput} placeholder="검색어를 입력해주세요." defaultValue={keyword} />
-                    <select name="sort" className={select} style={{ flexShrink: '0', width: '90px' }} defaultValue={sort}>
-                        <option value="">최신순</option>
-                        <option value="">오래된순</option>
-                        <option value="">조회수순</option>
-                        <option value="like">인기순</option>
-                        <option value="">댓글순</option>
-                    </select>
-                    <button type="submit" className={searchBoxButton}>검색</button>
-                </form>
+                <SearchForm type={type} keyword={keyword} sort={sort} />
             </div>
             <table className={tableCol}>
                 <caption>리스트 목록</caption>
                 <colgroup>
                     <col width="8%" />
                     <col width="auto" />
-                    <col width="15%" />
-                    <col width="7%" />
-                    <col width="7%" />
-                    <col width="7%" />
+                    <col width="12%" />
+                    <col width="10%" />
+                    <col width="10%" />
+                    <col width="10%" />
                 </colgroup>
                 <thead>
                     <tr>
@@ -108,23 +101,19 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
                             </td>
 
                             {/* 조회수 */}
-                            <td className={tableColTd}>
-                                <span></span>
-                            </td>
+                            <td className={tableColTd}>{post.view_count ?? 0}</td>
 
                             {/* 좋아요 */}
                             <td className={tableColTd}>
                                 <span>{post.like_count ?? 0}</span>
                             </td>
 
-                            {/* 댓글 */}
-                            <td className={tableColTd}>
-                                <span></span>
-                            </td>
+                            {/* 댓글수 */}
+                            <td className={tableColTd}>{post.comment_count ?? 0}</td>
                         </tr>
                     )) : (
                         <tr>
-                            <td className={tableEmptyList} colSpan={4}>게시물이 없습니다.</td>
+                            <td className={tableEmptyList} colSpan={6}>게시물이 없습니다.</td>
                         </tr>
                     )}
                 </tbody>
