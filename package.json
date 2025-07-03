@@ -25,7 +25,8 @@
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
     "sharp": "^0.34.2",
-    "uuid": "^11.1.0"
+    "uuid": "^11.1.0",
+    "zod": "^3.25.71"
   },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
@@ -50,6 +51,7 @@
     "husky": "^9.1.7",
     "jest": "^30.0.4",
     "jest-environment-jsdom": "^30.0.4",
+    "jscpd": "^4.0.5",
     "lint-staged": "^16.1.2",
     "prettier": "^3.6.2",
     "ts-jest": "^29.4.0",

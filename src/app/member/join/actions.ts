@@ -1,46 +1,95 @@
 'use server';
 
 import { redirect } from 'next/navigation';
-import knex from '@/lib/knex';
-import bcrypt from 'bcrypt';
+import { z } from 'zod';
+import { UserService } from '@/lib/userService';
 
-export async function joinAction(prevState: any, formData: FormData) {
-  const userId = formData.get('userId') as string;
-  const password = formData.get('password') as string;
-  const userName = formData.get('userName') as string;
-  const userPhone = formData.get('userPhone') as string;
-  const userEmail = formData.get('userEmail') as string;
+// Zod 스키마 정의
+const joinSchema = z.object({
+  userId: z
+    .string()
+    .min(4, '아이디는 4자 이상이어야 합니다.')
+    .max(20, '아이디는 20자 이하여야 합니다.'),
+  password: z.string().min(6, '비밀번호는 6자 이상이어야 합니다.'),
+  userName: z.string().min(2, '이름은 2자 이상이어야 합니다.'),
+  userPhone: z.string().optional(),
+  userEmail: z
+    .string()
+    .email('유효한 이메일 주소를 입력해주세요.')
+    .optional()
+    .or(z.literal('')), // 빈 문자열도 허용
+});
 
-  const fields = { userId, userName, userPhone, userEmail };
+export async function joinAction(
+  prevState: {
+    error?: string;
+    fieldErrors?: {
+      userId?: string[];
+      password?: string[];
+      userName?: string[];
+      userPhone?: string[];
+      userEmail?: string[];
+    };
+    fields: {
+      userId: string;
+      userName: string;
+      userPhone: string;
+      userEmail: string;
+    };
+  },
+  formData: FormData,
+) {
+  const parsed = joinSchema.safeParse({
+    userId: formData.get('userId'),
+    password: formData.get('password'),
+    userName: formData.get('userName'),
+    userPhone: formData.get('userPhone'),
+    userEmail: formData.get('userEmail'),
+  });
 
-  if (!userId || !password || !userName) {
-    // 필수 필드 유효성 검사 (실제 프로덕션에서는 더 정교한 검사가 필요)
-    return { error: '아이디, 비밀번호, 이름은 필수입니다.', fields };
+  if (!parsed.success) {
+    const fieldErrors = parsed.error.flatten().fieldErrors;
+    const fields = {
+      userId: formData.get('userId') as string,
+      password: formData.get('password') as string,
+      userName: formData.get('userName') as string,
+      userPhone: formData.get('userPhone') as string,
+      userEmail: formData.get('userEmail') as string,
+    };
+    return { error: '입력값을 확인해주세요.', fieldErrors, fields };
   }
+
+  const { userId, password, userName, userPhone, userEmail } = parsed.data;
 
   try {
     // 아이디 중복 확인
-    const existingUser = await knex('relaket_user').where({ user_id: userId }).first();
+    const existingUser = await UserService.findUserById(userId);
     if (existingUser) {
-      return { error: '이미 사용 중인 아이디입니다.', fields };
+      return {
+        error: '이미 사용 중인 아이디입니다.',
+        fields: { userId, userName, userPhone, userEmail },
+      };
     }
 
     // 비밀번호 암호화
-    const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await UserService.hashPassword(password);
 
     // 데이터베이스에 회원 정보 저장
-    await knex('relaket_user').insert({
-      user_id: userId,
-      password: hashedPassword,
-      user_name: userName,
-      user_phone: userPhone,
-      user_email: userEmail,
+    await UserService.createUser({
+      userId,
+      passwordHash: hashedPassword,
+      userName,
+      userPhone,
+      userEmail: userEmail === '' ? undefined : userEmail, // 빈 문자열은 undefined로 처리하여 DB에 null 저장
     });
   } catch (error) {
     console.error('회원가입 오류:', error);
-    return { error: '회원가입 중 오류가 발생했습니다. 다시 시도해주세요.', fields };
+    return {
+      error: '회원가입 중 오류가 발생했습니다. 다시 시도해주세요.',
+      fields: { userId, userName, userPhone, userEmail },
+    };
   }
 
   // 회원가입 완료 페이지로 리디렉션
   redirect('/member/join_end');
-} 
+}
