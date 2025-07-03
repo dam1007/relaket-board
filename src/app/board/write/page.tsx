@@ -7,11 +7,11 @@ import knex from '@/lib/knex';
 import WriteForm from './WriteForm';
 
 interface WritePageProps {
-  searchParams: { type?: string; id?: string };
+  searchParams: Promise<{ type?: string; id?: string }>;
 }
 
 export default async function Page({ searchParams }: WritePageProps) {
-  const { type, id } = searchParams;
+  const { type, id } = await searchParams;
   let post = null;
   let files: any[] = [];
 
