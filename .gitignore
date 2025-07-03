@@ -46,3 +46,6 @@ next-env.d.ts
 /.idea/relaket-board.iml
 /.idea/vcs.xml
 /.pull-master.cmd
+
+# vscode
+.vscode
