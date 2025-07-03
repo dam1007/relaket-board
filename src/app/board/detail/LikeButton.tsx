@@ -48,7 +48,7 @@ export default function LikeButton({ postId, initialCount, isLoggedIn, userId }:
       disabled={isPending}
     >
       <BiSolidLike />
-      좋아요 <strong>{likeCount}</strong>
+      <span>좋아요</span> <strong>{likeCount}</strong>
     </button>
   );
 } 
