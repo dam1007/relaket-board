@@ -1,4 +1,4 @@
-'use client'; // App Router 사용하는 경우 필요
+'use client';
 
 import React from 'react';
 import { Editor } from '@tinymce/tinymce-react';
@@ -6,8 +6,8 @@ import type { Editor as TinyMCEEditor } from 'tinymce';
 
 interface MyEditorProps {
     initialValue?: string;
-    onChange?: (content: string) => void;
     name: string;
+    onChange?: (content: string) => void;
 }
 
 const MyEditor: React.FC<MyEditorProps> = ({ initialValue, name, onChange }) => {
@@ -18,7 +18,7 @@ const MyEditor: React.FC<MyEditorProps> = ({ initialValue, name, onChange }) => 
     return (
         <Editor
             apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
-            value={initialValue ? initialValue : ''}
+            initialValue={initialValue ?? ''}
             textareaName={name}
             onEditorChange={handleEditorChange}
             init={{
@@ -55,10 +55,6 @@ const MyEditor: React.FC<MyEditorProps> = ({ initialValue, name, onChange }) => 
                         failure('업로드 실패');
                     });
                 },
-                /* automatic_uploads: false, // 자동 업로드 비활성화
-                images_upload_handler: () => {}, // 아무 것도 하지 않음
-                images_dataimg_filter: () => true, // base64 삽입 허용
-                paste_data_images: true, // 붙여넣은 이미지도 base64 처리 */
             }}
         />
     );
