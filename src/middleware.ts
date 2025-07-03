@@ -7,7 +7,7 @@ const SESSION_TTL = process.env.SESSION_TTL ? parseInt(process.env.SESSION_TTL, 
 const secret = process.env.SESSION_SECRET || 'my-secret';
 const SESSION_PLAIN_COOKIE_NAME = process.env.SESSION_PLAIN_COOKIE_NAME || 'psid';
 
-// 회원 전용 URL 목록
+// 회원 전용 URL 목록 (로그인 필요)
 const memberOnlyPaths = [/^\/board\/write/];
 
 function encryptSessionId(sessionId: string) {
@@ -41,10 +41,14 @@ export function middleware(request: NextRequest) {
 
   // 회원 전용 URL 접근 시 로그인(쿠키) 체크
   const { pathname } = request.nextUrl;
+  
   const isMemberOnly = memberOnlyPaths.some((regex) => regex.test(pathname));
+  
   if (isMemberOnly) {
     const plainSessionId = request.cookies.get(SESSION_PLAIN_COOKIE_NAME)?.value;
     const encodedSessionId = request.cookies.get(SESSION_ID_COOKIE_NAME)?.value;
+    
+    // 로그인 체크
     if (!plainSessionId || !encodedSessionId || encodeBase64(plainSessionId) !== encodedSessionId) {
       const url = request.nextUrl.clone();
       url.pathname = '/member/login';
