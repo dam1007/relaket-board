@@ -1,11 +1,30 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { v4 as uuidv4 } from 'uuid';
+import crypto from 'crypto';
 
 const SESSION_ID_COOKIE_NAME = process.env.SESSION_ID_COOKIE_NAME || 'sessionId';
 const SESSION_TTL = process.env.SESSION_TTL ? parseInt(process.env.SESSION_TTL, 10) : 60 * 60 * 24; // 24시간
+const secret = process.env.SESSION_SECRET || 'my-secret';
+const SESSION_PLAIN_COOKIE_NAME = process.env.SESSION_PLAIN_COOKIE_NAME || 'psid';
 
-// 회원 전용 URL 목록
+// 회원 전용 URL 목록 (로그인 필요)
 const memberOnlyPaths = [/^\/board\/write/];
+
+function encryptSessionId(sessionId: string) {
+  return crypto.createHmac('sha256', secret).update(sessionId).digest('hex');
+}
+
+function encodeBase64(str: string) {
+  if (typeof Buffer !== 'undefined') {
+    return Buffer.from(str, 'utf-8').toString('base64');
+  }
+  // Edge 환경 호환: btoa 사용 (단, ascii만 지원)
+  try {
+    return btoa(unescape(encodeURIComponent(str)));
+  } catch {
+    return '';
+  }
+}
 
 export function middleware(request: NextRequest) {
   let sessionId = request.cookies.get(SESSION_ID_COOKIE_NAME)?.value;
@@ -18,17 +37,23 @@ export function middleware(request: NextRequest) {
       sameSite: 'strict',
       path: '/',
     });
-    // 회원 전용 URL 접근 시 리다이렉트 체크를 위해 아래에서 계속 진행
-    // return response;
   }
 
   // 회원 전용 URL 접근 시 로그인(쿠키) 체크
   const { pathname } = request.nextUrl;
+  
   const isMemberOnly = memberOnlyPaths.some((regex) => regex.test(pathname));
-  if (isMemberOnly && !sessionId) {
-    const url = request.nextUrl.clone();
-    url.pathname = '/member/only';
-    return NextResponse.redirect(url);
+  
+  if (isMemberOnly) {
+    const plainSessionId = request.cookies.get(SESSION_PLAIN_COOKIE_NAME)?.value;
+    const encodedSessionId = request.cookies.get(SESSION_ID_COOKIE_NAME)?.value;
+    
+    // 로그인 체크
+    if (!plainSessionId || !encodedSessionId || encodeBase64(plainSessionId) !== encodedSessionId) {
+      const url = request.nextUrl.clone();
+      url.pathname = '/member/login';
+      return NextResponse.redirect(url);
+    }
   }
 
   return NextResponse.next();
