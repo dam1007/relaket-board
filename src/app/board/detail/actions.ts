@@ -6,10 +6,28 @@ import path from 'path';
 import fs from 'fs/promises';
 import { getSession } from '@/lib/redis';
 
-export async function likePostAction(postId: number) {
-  await knex('relaket_post')
-    .where({ id: postId })
-    .increment('like_count', 1);
+export async function likePostAction(postId: number, isLiked: boolean) {
+  const loginUser = await getSession('user');
+  if (!loginUser) {
+    throw new Error('로그인이 필요합니다.');
+  }
+  const userId = loginUser.userId;
+
+  // relaket_post_like 테이블에 userId, postId로 좋아요 여부 확인
+  const likeRow = await knex('relaket_post_like').where({ post_id: postId, user_id: userId }).first();
+
+  if (!isLiked && !likeRow) {
+    // 좋아요 추가
+    await knex('relaket_post_like').insert({ post_id: postId, user_id: userId });
+    await knex('relaket_post').where({ id: postId }).increment('like_count', 1);
+    return false; // 좋아요 상태로 변경됨
+  } else if (isLiked && likeRow) {
+    // 좋아요 취소
+    await knex('relaket_post_like').where({ post_id: postId, user_id: userId }).del();
+    await knex('relaket_post').where({ id: postId }).decrement('like_count', 1);
+    return true; // 좋아요 취소됨
+  }
+  return isLiked;
 }
 
 export async function deletePostAction(formData: FormData) {
