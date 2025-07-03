@@ -180,7 +180,7 @@ export const button = recipe({
                 '> span': {
                     color: 'white',
                 }
-            }
+            },
         },
         size: {
             small: {fontSize: '12px', padding: '4px 8px'},
@@ -189,6 +189,23 @@ export const button = recipe({
             full: {width: '100%', height: '48px', fontSize: '16px', padding: '6px 12px', borderRadius: '7px',},
         }
     },
+});
+
+// 좋아요 버튼
+export const likeButton = style({
+    display: 'inline-flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexWrap: 'nowrap',
+    gap: '5px',
+    height: '42px',
+    padding: '6px 12px',
+    backgroundColor: 'transparent',
+    borderRadius: '8px',
+    fontSize: '16px',
+    ':hover': {
+        backgroundColor: vars.color.hoverBg,
+    }
 });
 
 // 정렬

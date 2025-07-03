@@ -2,6 +2,8 @@
 
 import { useState, useTransition, useEffect } from 'react';
 import { likePostAction } from './actions';
+import { BiSolidLike } from "react-icons/bi";
+import { likeButton } from '@/styles/components.css';
 
 interface LikeButtonProps {
   postId: number;
@@ -41,11 +43,12 @@ export default function LikeButton({ postId, initialCount, isLoggedIn, userId }:
   return (
     <button
       type="button"
+      className={likeButton}
       onClick={handleLike}
       disabled={isPending}
-      style={{ fontWeight: 'bold', fontSize: '1.1em', cursor: isLoggedIn ? 'pointer' : 'not-allowed', color: liked ? 'red' : undefined }}
     >
-      👍 좋아요 {likeCount}
+      <BiSolidLike />
+      좋아요 <strong>{likeCount}</strong>
     </button>
   );
 } 
