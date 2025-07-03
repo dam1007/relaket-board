@@ -2,6 +2,8 @@
 
 import { useState, useTransition } from 'react';
 import { likePostAction } from './actions';
+import { BiSolidLike } from "react-icons/bi";
+import { likeButton } from '@/styles/components.css';
 
 export default function LikeButton({ postId, initialCount }: { postId: number, initialCount: number }) {
   const [likeCount, setLikeCount] = useState(initialCount);
@@ -17,11 +19,12 @@ export default function LikeButton({ postId, initialCount }: { postId: number, i
   return (
     <button
       type="button"
+      className={likeButton}
       onClick={handleLike}
       disabled={isPending}
-      style={{ fontWeight: 'bold', fontSize: '1.1em', cursor: 'pointer' }}
     >
-      👍 좋아요 {likeCount}
+      <BiSolidLike /> 
+      좋아요 <strong>{likeCount}</strong>
     </button>
   );
 } 

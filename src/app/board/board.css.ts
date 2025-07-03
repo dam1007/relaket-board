@@ -8,9 +8,9 @@ export const writeBox = style({
 
 export const writeBoxHeader = style({
     display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    gap: '15px',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
     flexWrap: 'nowrap',
     padding: '18px 25px',
     borderBottom: `1px solid ${vars.color.border}`,
@@ -22,7 +22,40 @@ export const writeBoxTitle = style({
     fontWeight: '700'
 });
 
-export const writeBoxDate = style({
+export const writeBoxInfoWrap = style({
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: '20px',
+    flexWrap: 'nowrap',
+    width: '100%',
+    marginTop: '10px',
+});
+
+export const writeBoxInfoList = style({
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    gap: '20px',
+    flexWrap: 'nowrap',
+});
+
+export const writeBoxInfoListItem = style({
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    flexWrap: 'nowrap',
+    gap: '4px',
+    color: vars.color.gray666,
+});
+
+export const writeBoxUserIP = style({
+    fontSize: '12px',
+    color: vars.color.gray666,
+    verticalAlign: 'middle',
+});
+
+export const writeBoxRegistDate = style({
     color: vars.color.gray666,
 });
 

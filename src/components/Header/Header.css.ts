@@ -11,7 +11,8 @@ export const header = style({
     alignItems: 'center',
     flexWrap: 'wrap',
     gap: 30,
-    border: '1px solid #ddd'
+    border: '1px solid #ddd',
+    backgroundColor: '#fff',
 });
 
 export const headerInner = style({

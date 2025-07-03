@@ -17,7 +17,7 @@ globalStyle('.member_wrapper', {
 
 globalStyle('.board_wrapper', {
     minHeight: 'calc(100vh - 64px)',
-    padding: '100px 0 0',
+    padding: '100px 0 120px',
     backgroundColor: 'white'
 });
 

@@ -61,7 +61,10 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
                     <input type="text" name="keyword" className={searchBoxInput} placeholder="검색어를 입력해주세요." defaultValue={keyword} />
                     <select name="sort" className={select} style={{ flexShrink: '0', width: '90px' }} defaultValue={sort}>
                         <option value="">최신순</option>
+                        <option value="">오래된순</option>
+                        <option value="">조회수순</option>
                         <option value="like">인기순</option>
+                        <option value="">댓글순</option>
                     </select>
                     <button type="submit" className={searchBoxButton}>검색</button>
                 </form>
@@ -69,33 +72,54 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
             <table className={tableCol}>
                 <caption>리스트 목록</caption>
                 <colgroup>
-                    <col width="10%" />
+                    <col width="8%" />
                     <col width="auto" />
-                    <col width="18%" />
-                    <col width="10%" />
+                    <col width="15%" />
+                    <col width="7%" />
+                    <col width="7%" />
+                    <col width="7%" />
                 </colgroup>
                 <thead>
                     <tr>
                         <th className={tableColTh}>No.</th>
                         <th className={tableColTh}>제목</th>
                         <th className={tableColTh}>등록일</th>
+                        <th className={tableColTh}>조회수</th>
                         <th className={tableColTh}>좋아요</th>
+                        <th className={tableColTh}>댓글</th>
                     </tr>
                 </thead>
                 <tbody>
                     {posts.length > 0 ? posts.map((post, idx) => (
                         <tr key={post.id}>
+                            {/* No */}
                             <td className={tableColTd}>{totalCount - ((pageNum - 1) * pageSize + idx)}</td>
+                            
+                            {/* 제목 */}
                             <td className={tableColTd}>
                                 <Link href={`/board/detail?id=${post.id}`} className={`${ellipsisOneLine} ${hoverUnderline}`} style={{ width: '90%' }}>
                                     {post.title}
                                 </Link>
                             </td>
+
+                            {/* 등록일 */}
                             <td className={tableColTd}>
                                 <span>{post.created_at?.toISOString().slice(0, 10) ?? ''}</span>
                             </td>
+
+                            {/* 조회수 */}
+                            <td className={tableColTd}>
+                                <span></span>
+                            </td>
+
+                            {/* 좋아요 */}
                             <td className={tableColTd}>
                                 <span>{post.like_count ?? 0}</span>
+                            </td>
+
+                            {/* 댓글 */}
+                            <td className={tableColTd}>
+                                <span></span>
                             </td>
                         </tr>
                     )) : (
