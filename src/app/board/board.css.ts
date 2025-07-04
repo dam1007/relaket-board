@@ -1,9 +1,10 @@
 import { vars } from "@/styles/global.css";
 import { style } from "@vanilla-extract/css";
 
+// s: 게시판 입력 영역
 export const writeBox = style({
-    borderRadius: '10px',
-    border: `1px solid ${vars.color.border}`,
+    borderTop: `1px solid ${vars.color.border}`,
+    borderBottom: `1px solid ${vars.color.border}`,
 });
 
 export const writeBoxHeader = style({
@@ -12,7 +13,7 @@ export const writeBoxHeader = style({
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
     flexWrap: 'nowrap',
-    padding: '18px 25px',
+    padding: '15px',
     borderBottom: `1px solid ${vars.color.border}`,
 });
 
@@ -29,7 +30,7 @@ export const writeBoxInfoWrap = style({
     gap: '20px',
     flexWrap: 'nowrap',
     width: '100%',
-    marginTop: '10px',
+    marginTop: '15px',
 });
 
 export const writeBoxInfoList = style({
@@ -63,7 +64,7 @@ export const writeBoxBody = style({
 });
 
 export const writeBoxTextWrap = style({
-    padding: '25px',
+    padding: '20px 15px',
     minHeight: '800px',
     overflowY: 'auto',
 });
@@ -81,3 +82,8 @@ export const writeBoxFileWrap = style({
 export const writeBoxFileTitle = style({
     fontWeight: '500'
 });
+// e: 게시판 입력 영역
+
+// s: 게시판 댓글 영역
+
+// e: 게시판 댓글 영역
