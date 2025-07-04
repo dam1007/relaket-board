@@ -40,36 +40,42 @@ const MyEditor: React.FC<MyEditorProps> = ({ initialValue, name, onChange }) => 
                 images_file_types: 'jpg, jpeg, png',
                 images_upload_url: '/api/upload', // 이미지 업로드용 서버 엔드포인트
                 automatic_uploads: true,
-                images_upload_handler: (
-                    blobInfo: any,
-                    success: (url: string) => void,
-                    failure: (err: string) => void
-                ) => {
+                images_upload_handler: (blobInfo) => new Promise(async (resolve, reject) => {
                     const formData = new FormData();
                     formData.append('file', blobInfo.blob(), blobInfo.filename());
 
-                    fetch('/api/upload', {
-                        method: 'POST',
-                        body: formData,
-                    }).then((res) => {
-                        if (!res.ok) {
-                            return res.json().then(err => { throw new Error(err.error || '업로드 실패'); });
+                    try {
+                        const response = await fetch('/api/upload', {
+                            method: 'POST',
+                            body: formData,
+                        });
+
+                        if (!response.ok) {
+                            // 서버가 에러 응답을 보냈을 때, 응답 본문을 텍스트로 읽어 에러 메시지로 사용
+                            const errorText = await response.text();
+                            try {
+                                // 에러 메시지가 JSON 형태일 수 있으므로 파싱 시도
+                                const errorJson = JSON.parse(errorText);
+                                reject(errorJson.error || 'HTTP error!');
+                            } catch {
+                                // JSON 파싱 실패 시, 텍스트 자체를 에러 메시지로 사용
+                                reject(`HTTP error! status: ${response.status}, ${errorText}`);
+                            }
+                            return;
                         }
-                        return res.json();
-                    }).then((json) => {
+
+                        const json = await response.json();
+
                         if (json && json.location) {
-                            console.log('json.location', json.location);
-                            console.log(success);
-                            success(json.location);
+                            resolve(json.location);
                         } else {
-                            console.log('json.location 없음');
-                            failure('서버 응답 오류: url 없음');
+                            reject('Invalid JSON: "location" property missing.');
                         }
-                    }).catch((err) => {
-                        console.log(err);
-                        failure('업로드 실패: ' + err.message);
-                    });
-                },
+                    } catch (error: any) {
+                        // 네트워크 오류 또는 기타 예외
+                        reject(`Upload failed: ${error.message}`);
+                    }
+                }),
             }}
         />
     );
