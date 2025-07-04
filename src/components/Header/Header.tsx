@@ -13,6 +13,7 @@ export default async function Header() {
                 <nav className={styles.gnbNav}>
                     <Link href="/" className={styles.gnbNavLink}>홈</Link>
                     <Link href="/board/list" className={styles.gnbNavLink}>게시판</Link>
+                    <Link href="/about" className={styles.gnbNavLink}>프로젝트소개</Link>
                 </nav>
                 <nav className={styles.joinNav}>
                     {user ? (

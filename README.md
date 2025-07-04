@@ -2,8 +2,8 @@
 
 ## 프로젝트 소개
 
-relaket-board는 Next.js(App Router), React, TypeScript, MySQL, Redis, Vanilla Extract를 기반으로 한 실전형 게시판 프로젝트입니다.  
-회원 인증, 게시글 CRUD, 파일 업로드/다운로드, 좋아요, 댓글, 조회수, 페이지네이션 등 실서비스 수준의 기능을 제공합니다.
+relaket-board는 Next.js(App Router), React, TypeScript, MySQL, Redis, Vanilla Extract를 기반으로 한 실전형 게시판 프로젝트입니다.
+회원 인증, 게시글 CRUD, 파일 업로드/다운로드, 좋아요, 댓글, 조회수, 페이지네이션, 동적 도움말 페이지 등 실서비스 수준의 기능을 제공합니다.
 
 ## 기술 스택
 
@@ -14,6 +14,7 @@ relaket-board는 Next.js(App Router), React, TypeScript, MySQL, Redis, Vanilla E
 - **Redis** (ioredis, 세션/인증)
 - **Vanilla Extract** (CSS-in-TS)
 - **react-icons**
+- **marked** (Markdown to HTML)
 
 ## 주요 기능
 
@@ -32,6 +33,8 @@ relaket-board는 Next.js(App Router), React, TypeScript, MySQL, Redis, Vanilla E
 - **댓글** (UI/DB 구조만, 기능 확장 가능)
 - **파일 업로드/다운로드**
   - public/uploads 저장, DB에 원본/저장명 기록
+- **도움말**
+  - `README.md` 파일을 동적으로 읽어 HTML로 변환하여 표시
 - **미들웨어**
   - 회원 전용/비회원 접근 제어, 세션 쿠키 검증
 - **API Route**
@@ -47,6 +50,7 @@ src/
       detail/       # 게시글 상세, 좋아요, 삭제
       write/        # 글쓰기/수정 폼, 액션
     member/         # 회원가입, 로그인, 로그아웃, 인증
+    guide/          # 도움말 페이지
     api/
       file/         # 파일 다운로드 API
       post/         # 좋아요 여부 API
