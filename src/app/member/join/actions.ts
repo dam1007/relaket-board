@@ -8,10 +8,9 @@ export async function joinAction(prevState: any, formData: FormData) {
   const userId = formData.get('userId') as string;
   const password = formData.get('password') as string;
   const userName = formData.get('userName') as string;
-  const userPhone = formData.get('userPhone') as string;
   const userEmail = formData.get('userEmail') as string;
 
-  const fields = { userId, userName, userPhone, userEmail };
+  const fields = { userId, userName, userEmail };
 
   if (!userId || !password || !userName) {
     // 필수 필드 유효성 검사 (실제 프로덕션에서는 더 정교한 검사가 필요)
@@ -33,7 +32,6 @@ export async function joinAction(prevState: any, formData: FormData) {
       user_id: userId,
       password: hashedPassword,
       user_name: userName,
-      user_phone: userPhone,
       user_email: userEmail,
     });
   } catch (error) {

@@ -58,21 +58,12 @@ export default function Page() {
                     </div>
                     <div className={inputWrap}>
                         <InputText
-                            type={'tel'}
-                            name={'userPhone'}
-                            id={'userPhone'}
-                            label={'휴대전화'}
-                            placeholder={''}
-                            defaultValue={state.fields?.userPhone}
-                        />
-                    </div>
-                    <div className={inputWrap}>
-                        <InputText
                             type={'email'}
                             name={'userEmail'}
                             id={'userEmail'}
                             label={'이메일'}
                             placeholder={''}
+                            required
                             defaultValue={state.fields?.userEmail}
                         />
                     </div>
