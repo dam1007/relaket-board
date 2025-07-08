@@ -3,16 +3,17 @@
 import { useState, useTransition, useEffect } from 'react';
 import { likePostAction } from './actions';
 import { BiSolidLike } from "react-icons/bi";
-import { likeButton } from '@/styles/components.css';
+import { button } from '@/styles/components.css';
 
 interface LikeButtonProps {
   postId: number;
   initialCount: number;
   isLoggedIn: boolean;
   userId?: number;
+  size: "medium" | "small" | "large" | "full" | undefined;
 }
 
-export default function LikeButton({ postId, initialCount, isLoggedIn, userId }: LikeButtonProps) {
+export default function LikeButton({ postId, initialCount, isLoggedIn, userId, size }: LikeButtonProps) {
   const [likeCount, setLikeCount] = useState(initialCount);
   const [isPending, startTransition] = useTransition();
   const [liked, setLiked] = useState(false);
@@ -43,7 +44,7 @@ export default function LikeButton({ postId, initialCount, isLoggedIn, userId }:
   return (
     <button
       type="button"
-      className={likeButton}
+      className={button({type: 'like', size: size})}
       onClick={handleLike}
       disabled={isPending}
     >

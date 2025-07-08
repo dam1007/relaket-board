@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import * as board from "../board.css";
-import { hoverUnderline, buttonWrapCenter, buttonWrapRight, button } from '@/styles/components.css';
+import { hoverUnderline, buttonWrapRight, button } from '@/styles/components.css';
 import knex from '@/lib/knex';
 import { notFound } from 'next/navigation';
 import LikeButton from './LikeButton';
@@ -39,24 +39,24 @@ export default async function Page({ searchParams }: DetailProps) {
                     <h3 className={board.writeBoxTitle}>{post.title}</h3>
                     <div className={board.writeBoxInfoWrap}>
                       <ul className={board.writeBoxInfoList}>
-                        <li className={board.writeBoxInfoListItem}>
+                        <li className={`${board.writeBoxInfoListItem} ${board.seperate}`}>
                           <span>{'작성자'}</span>
                           <span className={board.writeBoxUserIP}>({'IP'})</span>
                         </li>
                         <li className={board.writeBoxInfoListItem}>
                           <span className={board.writeBoxRegistDate}>{post.created_at?.toISOString().slice(0, 10) ?? ''}</span>
-                          <span className={board.writeBoxRegistDate}>{'등록시간'}</span>
+                          <span className={board.writeBoxRegistDate}>{'등록시간 데이터'}</span>
                         </li>
                       </ul>
                       <ul className={board.writeBoxInfoList}>
                         <li className={`${board.writeBoxInfoListItem}`}>
-                          조회 <b>{0}</b>
+                          조회수 <b className={board.writeBoxInfoListCount}>{0}</b>
                         </li>
                         <li className={`${board.writeBoxInfoListItem}`}>
-                          좋아요 <b>{0}</b>
+                          좋아요 <b className={board.writeBoxInfoListCount}>{0}</b>
                         </li>
                         <li className={`${board.writeBoxInfoListItem}`}>
-                          댓글 <b>{0}</b>
+                          댓글 <b className={board.writeBoxInfoListCount}>{0}</b>
                         </li>
                       </ul>
                     </div>
@@ -80,7 +80,7 @@ export default async function Page({ searchParams }: DetailProps) {
                 </div>
             </div>
             <div style={{ margin: '20px 0', textAlign: 'right' }}>
-                <LikeButton postId={post.id} initialCount={post.like_count ?? 0} isLoggedIn={!!loginUser} userId={loginUser?.userId} />
+                <LikeButton postId={post.id} initialCount={post.like_count ?? 0} isLoggedIn={!!loginUser} userId={loginUser?.userId} size={'large'} />
             </div>
             <div className={buttonWrapRight} style={{ marginTop: '20px', gap: '10px' }}>
                 <Link href={'/board/list'} className={button({ type: 'white', size: 'large' })}>목록</Link>
@@ -93,7 +93,7 @@ export default async function Page({ searchParams }: DetailProps) {
             </div>
             
             {/* 댓글영역 */}
-            <Comment />
+            <Comment postId={post.id} initialCount={post.like_count ?? 0} loginUser={loginUser} isLoggedIn={!!loginUser} userId={loginUser?.userId} />
         </>
     );
 };

@@ -1,6 +1,6 @@
 // 게시판 리스트
 import Link from 'next/link';
-import { flex, button, tableCol, tableColTh, tableColTd, tableEmptyList, searchBox, searchBoxInput, searchBoxButton, select, ellipsisOneLine, hoverUnderline } from '@/styles/components.css';
+import { flex, button, tableCol, tableColTh, tableColTd, tableEmptyList, ellipsisOneLine, hoverUnderline } from '@/styles/components.css';
 import Pagination from '@/components/Pagination/Pagination';
 import knex from '@/lib/knex';
 import SearchForm from './SearchForm';
@@ -67,37 +67,38 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
                 <colgroup>
                     <col width="8%" />
                     <col width="auto" />
+                    <col width="10%" />
+                    <col width="10%" />
+                    <col width="10%" />
                     <col width="12%" />
-                    <col width="10%" />
-                    <col width="10%" />
-                    <col width="10%" />
                 </colgroup>
                 <thead>
                     <tr>
                         <th className={tableColTh}>No.</th>
                         <th className={tableColTh}>제목</th>
-                        <th className={tableColTh}>등록일</th>
                         <th className={tableColTh}>조회수</th>
                         <th className={tableColTh}>좋아요</th>
                         <th className={tableColTh}>댓글</th>
+                        <th className={tableColTh}>등록일</th>
                     </tr>
                 </thead>
                 <tbody>
                     {posts.length > 0 ? posts.map((post, idx) => (
                         <tr key={post.id}>
                             {/* No */}
-                            <td className={tableColTd}>{totalCount - ((pageNum - 1) * pageSize + idx)}</td>
+                            <td className={tableColTd}>
+                                {totalCount - ((pageNum - 1) * pageSize + idx)}
+                            </td>
                             
                             {/* 제목 */}
                             <td className={tableColTd}>
-                                <Link href={`/board/detail?id=${post.id}`} className={`${ellipsisOneLine} ${hoverUnderline}`} style={{ width: '90%' }}>
+                                <Link 
+                                    href={`/board/detail?id=${post.id}`} 
+                                    className={`${ellipsisOneLine} ${hoverUnderline}`} 
+                                    style={{ width: '90%' }}
+                                >
                                     {post.title}
                                 </Link>
-                            </td>
-
-                            {/* 등록일 */}
-                            <td className={tableColTd}>
-                                <span>{post.created_at?.toISOString().slice(0, 10) ?? ''}</span>
                             </td>
 
                             {/* 조회수 */}
@@ -110,6 +111,11 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
 
                             {/* 댓글수 */}
                             <td className={tableColTd}>{post.comment_count ?? 0}</td>
+
+                            {/* 등록일 */}
+                            <td className={tableColTd}>
+                                <span>{post.created_at?.toISOString().slice(0, 10) ?? ''}</span>
+                            </td>
                         </tr>
                     )) : (
                         <tr>

@@ -10,8 +10,12 @@ type AvatarProps = {
 
 export default function Avatar({src, alt, width, height}: AvatarProps) {
     return (
-        <figure className={avatar} style={{width: width, height: height}}>
-            <img className={avatarImage}
+        <figure 
+            className={avatar} 
+            style={{width: width, height: height}}
+        >
+            <img 
+                className={avatarImage}
                 src={src}
                 alt={alt}
             />
