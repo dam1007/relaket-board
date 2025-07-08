@@ -1,5 +1,4 @@
 import { globalStyle, createGlobalTheme } from '@vanilla-extract/css';
-import { select } from '@/styles/components.css';
 
 globalStyle('html, body', {
     overflowX: 'hidden',
@@ -42,6 +41,7 @@ export const vars = createGlobalTheme(':root', {
         black: '#09090B',
         gray: '#71717A',
         gray666: '#666',
+        gray999: '#999',
         red: '#DC2626',
         border: '#e4e4e7',
         hoverBg: '#f4f4f5',

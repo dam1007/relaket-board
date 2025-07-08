@@ -12,7 +12,8 @@ export const header = style({
     flexWrap: 'wrap',
     gap: 30,
     border: '1px solid #ddd',
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
+    zIndex: '100',
 });
 
 export const headerInner = style({

@@ -15,6 +15,7 @@ export const input = style({
 
 export const inputLabel = style({
     display: 'inline-flex',
+    gap: '4px',
     fontSize: '14px',
     fontWeight: '500',
     color: vars.color.black,

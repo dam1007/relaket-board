@@ -1,5 +1,6 @@
 // inputText (text, number, password, email)
 import * as styles from './InputText.css';
+import { textRequired } from '@/styles/components.css';
 
 type InputTextProps = {
     type: string;
@@ -15,7 +16,12 @@ type InputTextProps = {
 export default function InputText({type, name, id, label, placeholder, required, defaultValue, onChange}: InputTextProps) {
     return (
         <>
-            <label htmlFor={id} className={styles.inputLabel}>{label}</label>
+            <label 
+                htmlFor={id} 
+                className={styles.inputLabel}>
+                {label}{' '}
+                {required ? <span className={textRequired}>*</span> : null}
+            </label>
             <input 
                 type={type} 
                 name={name} 

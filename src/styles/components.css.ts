@@ -84,6 +84,14 @@ export const button = recipe({
                     backgroundColor: vars.color.hoverBg
                 }
             },
+            transparent: {
+                background: 'transparent', 
+                color: vars.color.primary, 
+                borderColor: vars.color.border,
+                ':hover': {
+                    backgroundColor: vars.color.hoverBg
+                }
+            },
             red: {
                 background: vars.color.red, 
                 color: 'white',
@@ -181,6 +189,15 @@ export const button = recipe({
                     color: 'white',
                 }
             },
+            like: {
+                gap: '5px',
+                background: 'white',
+                border: 'none',
+                backgroundColor: 'transparent',
+                ':hover': {
+                    background: vars.color.hoverBg,
+                }
+            }
         },
         size: {
             small: {fontSize: '12px', padding: '4px 8px'},
@@ -442,6 +459,10 @@ export const hoverUnderline = style({
     ':hover': {
         textDecoration: 'underline',
     }
+});
+
+export const textRequired = style({
+    color: 'red',
 });
 
 // 말줄임표(1줄)
