@@ -34,7 +34,7 @@ export async function joinAction(prevState: any, formData: FormData) {
       password: hashedPassword,
       user_name: userName,
       user_phone: userPhone,
-      user_email: userEmail,
+      user_email: userEmail || null,
     });
   } catch (error) {
     console.error('회원가입 오류:', error);
@@ -43,4 +43,4 @@ export async function joinAction(prevState: any, formData: FormData) {
 
   // 회원가입 완료 페이지로 리디렉션
   redirect('/member/join_end');
-} 
+}
