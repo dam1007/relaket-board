@@ -1,8 +1,7 @@
-// 댓글 영역 > 글자수 체크
 'use client'
 
 import * as styles from '@/components/LengthCheck/LengthCheck.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 interface LengthCheckProps {
     name: string;
@@ -10,19 +9,30 @@ interface LengthCheckProps {
     initialValue: string | undefined;
     maxLength: string;
     placeholder?: string;
+    onChange?: (value: string) => void;
 }
 
-export default function LengthCheck({ name, id, initialValue, maxLength, placeholder }: LengthCheckProps) {
-    const [text, setText] = useState(initialValue);
+export default function LengthCheck({ name, id, initialValue, maxLength, placeholder, onChange }: LengthCheckProps) {
+    const [text, setText] = useState(initialValue || '');
+
+    useEffect(() => {
+        if (initialValue !== undefined) {
+            setText(initialValue);
+        }
+    }, [initialValue]);
+
     const handleSetText = (event: React.ChangeEvent<HTMLTextAreaElement>) => {
         const value = event.target.value;
         const maxLengthNum = Number(maxLength);
         
-        // 글자 수 초과 시 잘림
+        let newText = value;
         if (value.length > maxLengthNum) {
-            setText(value.slice(0, maxLengthNum));
-        } else {
-            setText(value);
+            newText = value.slice(0, maxLengthNum);
+        }
+        setText(newText);
+
+        if (onChange) {
+            onChange(newText);
         }
     };
 
@@ -37,7 +47,7 @@ export default function LengthCheck({ name, id, initialValue, maxLength, placeho
                 onChange={handleSetText}
             />
             <span className={styles.lengthCheck}>
-                {text ? text.length: 0}
+                {text.length}
                 <span className={styles.maxLength}>
                     {' '}/{' '}{maxLength}
                 </span>

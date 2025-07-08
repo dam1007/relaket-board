@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useTransition, useEffect } from 'react';
-import { likePostAction } from './actions';
+import { likeEntityAction } from './actions';
 import { BiSolidLike } from "react-icons/bi";
 import { button } from '@/styles/components.css';
 
@@ -35,9 +35,9 @@ export default function LikeButton({ postId, initialCount, isLoggedIn, userId, s
       return;
     }
     startTransition(async () => {
-      const toggled = await likePostAction(postId, liked);
+      const toggled = await likeEntityAction(entityType, entityId, liked);
       setLiked(!liked);
-      setLikeCount((prev) => prev + (toggled ? -1 : 1));
+      setLikeCount((prev) => prev + (toggled ? 1 : -1));
     });
   };
 
@@ -49,7 +49,7 @@ export default function LikeButton({ postId, initialCount, isLoggedIn, userId, s
       disabled={isPending}
     >
       <BiSolidLike />
-      <span>좋아요</span> <strong>{likeCount}</strong>
+      <span>좋아요</span> <strong>{initialCount}</strong>
     </button>
   );
 } 

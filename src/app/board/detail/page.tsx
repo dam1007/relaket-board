@@ -21,6 +21,9 @@ export default async function Page({ searchParams }: DetailProps) {
     const numId = Number(id);
     if (!numId) return notFound();
 
+    // 조회수 증가
+    await knex('relaket_post').where({ id: numId }).increment('view_count', 1);
+
     // 게시글 조회
     const post = await knex('relaket_post').where({ id: numId }).first();
     if (!post) return notFound();
@@ -31,6 +34,12 @@ export default async function Page({ searchParams }: DetailProps) {
     // 현재 로그인 유저 정보 조회 (UI 표시용)
     const loginUser = await getSession('user');
     const isOwner = loginUser && post.user_id === loginUser.userId;
+
+    // 댓글 조회
+    const comments: CommentData[] = await knex('relaket_comment')
+      .where({ post_id: numId, parent_id: null })
+      .andWhere('deleted_at', null)
+      .orderBy('created_at', 'desc');
 
     return (
         <>
@@ -44,19 +53,19 @@ export default async function Page({ searchParams }: DetailProps) {
                           <span className={board.writeBoxUserIP}>({'IP'})</span>
                         </li>
                         <li className={board.writeBoxInfoListItem}>
-                          <span className={board.writeBoxRegistDate}>{post.created_at?.toISOString().slice(0, 10) ?? ''}</span>
-                          <span className={board.writeBoxRegistDate}>{'등록시간 데이터'}</span>
+                          <span className={board.writeBoxRegistDate}>{post.created_at?.toLocaleString() ?? ''}</span>
+                          
                         </li>
                       </ul>
                       <ul className={board.writeBoxInfoList}>
                         <li className={`${board.writeBoxInfoListItem}`}>
-                          조회수 <b className={board.writeBoxInfoListCount}>{0}</b>
+                          조회수 <b className={board.writeBoxInfoListCount}>{post.view_count ?? 0}</b>
                         </li>
                         <li className={`${board.writeBoxInfoListItem}`}>
-                          좋아요 <b className={board.writeBoxInfoListCount}>{0}</b>
+                          좋아요 <b className={board.writeBoxInfoListCount}>{post.like_count ?? 0}</b>
                         </li>
                         <li className={`${board.writeBoxInfoListItem}`}>
-                          댓글 <b className={board.writeBoxInfoListCount}>{0}</b>
+                          댓글 <b className={board.writeBoxInfoListCount}>{post.comment_count ?? 0}</b>
                         </li>
                       </ul>
                     </div>
@@ -80,7 +89,7 @@ export default async function Page({ searchParams }: DetailProps) {
                 </div>
             </div>
             <div style={{ margin: '20px 0', textAlign: 'right' }}>
-                <LikeButton postId={post.id} initialCount={post.like_count ?? 0} isLoggedIn={!!loginUser} userId={loginUser?.userId} size={'large'} />
+                <LikeButton entityId={post.id} entityType={'post'} initialCount={post.like_count ?? 0} isLoggedIn={!!loginUser} userId={loginUser?.userId} size={'large'} />
             </div>
             <div className={buttonWrapRight} style={{ marginTop: '20px', gap: '10px' }}>
                 <Link href={'/board/list'} className={button({ type: 'white', size: 'large' })}>목록</Link>
@@ -93,7 +102,18 @@ export default async function Page({ searchParams }: DetailProps) {
             </div>
             
             {/* 댓글영역 */}
-            <Comment postId={post.id} initialCount={post.like_count ?? 0} loginUser={loginUser} isLoggedIn={!!loginUser} userId={loginUser?.userId} />
+            <Comment postId={post.id} initialCount={post.like_count ?? 0} loginUser={loginUser} isLoggedIn={!!loginUser} userId={loginUser?.userId} comments={comments} />
         </>
     );
 };
+
+interface CommentData {
+  id: number;
+  post_id: number;
+  user_id: string;
+  parent_id: number | null;
+  content: string;
+  created_at: Date;
+  updated_at: Date;
+  deleted_at: Date | null;
+}
