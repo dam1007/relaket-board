@@ -6,7 +6,7 @@ import * as board from "../board.css";
 import Profile from "@/components/Profile/Profile";
 import { buttonWrapLeft, buttonWrapBetween, button } from '@/styles/components.css';
 import LikeButton from "./LikeButton";
-import LengthCheck from "@/components/LengthCheck/LengthCheck";
+import CommentLengthCheck from "./CommentLengthCheck";
 
 interface CommentLikeButtonProps {
     postId: number;
@@ -39,7 +39,7 @@ export default function Comment({ postId, initialCount, isLoggedIn, loginUser, u
 
                 {/* 댓글 작성 영역 */}
                 <div className={board.commentWriteWrap}>
-                    <LengthCheck 
+                    <CommentLengthCheck 
                         name="comment" 
                         id="comment" 
                         initialValue="" 
@@ -83,8 +83,8 @@ export default function Comment({ postId, initialCount, isLoggedIn, loginUser, u
                             <LikeButton 
                                 postId={postId} 
                                 initialCount={initialCount ?? 0} 
-                                isLoggedIn={!!loginUser} 
-                                userId={loginUser?.userId} 
+                                isLoggedIn={!!loginUser}
+                                userId={loginUser?.userId}
                                 size={'small'}
                             />
                         </div>
@@ -92,7 +92,7 @@ export default function Comment({ postId, initialCount, isLoggedIn, loginUser, u
                         {/* 답글 작성 영역 */}
                         {applyToggle ? 
                         <div className={board.commentWriteWrap}>
-                            <LengthCheck 
+                            <CommentLengthCheck 
                                 name="commentApply" 
                                 id="commentApply" 
                                 initialValue="" 
@@ -142,7 +142,7 @@ export default function Comment({ postId, initialCount, isLoggedIn, loginUser, u
                     {/* 답글 작성 영역 */}
                     {applyToggle && (
                         <div className={board.commentWriteWrap}>
-                            <LengthCheck 
+                            <CommentLengthCheck 
                                 name="commentApply" 
                                 id="commentApply" 
                                 initialValue="" 
@@ -197,7 +197,7 @@ export default function Comment({ postId, initialCount, isLoggedIn, loginUser, u
                     {/* 답글 작성 영역 */}
                     {applyToggle && (
                         <div className={board.commentWriteWrap}>
-                            <LengthCheck 
+                            <CommentLengthCheck 
                                 name="commentApply" 
                                 id="commentApply" 
                                 initialValue="" 
