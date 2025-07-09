@@ -17,6 +17,7 @@ export default function UserMenu({ user }: UserMenuProps) {
   const toggleRef = useRef<HTMLDivElement>(null);
   const [isPending, startTransition] = useTransition();
   const router = useRouter();
+
   const handleLogout = () => {
     startTransition(async () => {
       await logoutAction();
@@ -24,7 +25,8 @@ export default function UserMenu({ user }: UserMenuProps) {
     });
   };
 
-  useEffect(() => {
+  // 프로필 토글
+  useEffect(() => { 
     const handleDocumentClick = (event: MouseEvent) => {
       const target = event.target as Node;
 
@@ -34,9 +36,7 @@ export default function UserMenu({ user }: UserMenuProps) {
         setIsOpen(false);
       }
     };
-
     document.addEventListener('click', handleDocumentClick);
-
     return () => {
       document.removeEventListener('click', handleDocumentClick);
     };
