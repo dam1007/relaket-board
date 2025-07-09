@@ -21,3 +21,8 @@ globalStyle('.board_wrapper', {
     backgroundColor: 'white'
 });
 
+globalStyle('.mypage_wrapper', {
+    minHeight: 'calc(100vh - 64px)',
+    padding: '120px 0 0',
+    backgroundColor: 'white'
+});

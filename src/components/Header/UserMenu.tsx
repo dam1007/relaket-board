@@ -58,7 +58,7 @@ export default function UserMenu({ user }: UserMenuProps) {
           <span className={styles.userMail}>{user.userId}</span>
         </li>
         <li className={styles.myMenuItem}>
-          <Link className={styles.myMenuLink} href="">정보수정</Link>
+          <Link className={styles.myMenuLink} href="/mypage/myinfo">정보수정</Link>
         </li>
         <li className={`${styles.myMenuItem} ${styles.seperate}`}>
           <button 
