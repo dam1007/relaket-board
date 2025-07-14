@@ -4,6 +4,7 @@ import { useActionState } from 'react';
 import { myInfoAction } from './actions';
 import * as styles from '@/styles/components.css';
 import * as mypage from '@/app/mypage/mypage.css';
+import ProfileUpload from '@/components/ProfileUpload/ProfileUpload';
 
 const initialState = {
     error: '',
@@ -31,7 +32,9 @@ export default function page() {
                         <tbody>
                             <tr>
                                 <th className={styles.tableRowTh}>프로필</th>
-                                <td className={styles.tableRowTd}></td>
+                                <td className={styles.tableRowTd}>
+                                    <ProfileUpload />
+                                </td>
                             </tr>
                             <tr>
                                 <th className={styles.tableRowTh}>아이디</th>

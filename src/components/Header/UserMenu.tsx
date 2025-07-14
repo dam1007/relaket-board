@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef, useTransition } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import * as styles from './Header.css';
 import { headerAvatar, avatarImage } from "../Avatar/Avatar.css";
 import { logoutAction } from '@/app/member/logout/actions';
@@ -45,9 +46,12 @@ export default function UserMenu({ user }: UserMenuProps) {
   return (
     <div className={styles.myMenu} ref={toggleRef}>
       <figure className={headerAvatar}>
-        <img 
-          className={avatarImage} src={'https://placehold.co/30'}
-          alt={'프로필'} 
+        <Image 
+          src={'/default_profile.png'}
+          alt={'프로필 이미지'} 
+          width={100}
+          height={100}
+          className={avatarImage} 
         />
       </figure>
 
@@ -58,7 +62,11 @@ export default function UserMenu({ user }: UserMenuProps) {
           <span className={styles.userMail}>{user.userId}</span>
         </li>
         <li className={styles.myMenuItem}>
-          <Link className={styles.myMenuLink} href="/mypage/myinfo">정보수정</Link>
+          <Link 
+            className={styles.myMenuLink} 
+            href="/mypage/myinfo">
+            정보수정
+          </Link>
         </li>
         <li className={`${styles.myMenuItem} ${styles.seperate}`}>
           <button 

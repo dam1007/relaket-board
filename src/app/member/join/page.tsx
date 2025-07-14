@@ -3,7 +3,8 @@
 import { useActionState } from 'react';
 import * as member from '@/app/member/member.css';
 import InputText from '@/components/InputText/InputText';
-import { pageTitle, button, inputWrap } from '@/styles/components.css';
+import ProfileUpload from '@/components/ProfileUpload/ProfileUpload';
+import { pageTitle, button, inputWrap, buttonWrapCenter } from '@/styles/components.css';
 import { joinAction } from './actions';
 
 const initialState = {
@@ -24,6 +25,9 @@ export default function Page() {
             <div className={member.memberFormWrap}>
                 <h2 className={pageTitle}>회원가입</h2>
                 <form action={formAction}>
+                    <div className={buttonWrapCenter}>
+                        <ProfileUpload />
+                    </div>
                     <div className={inputWrap}>
                         <InputText
                             type={'text'}
