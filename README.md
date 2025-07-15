@@ -33,6 +33,8 @@ relaket-board는 Next.js(App Router), React, TypeScript, MySQL, Redis, Vanilla E
 - **댓글** (UI/DB 구조만, 기능 확장 가능)
 - **파일 업로드/다운로드**
   - public/uploads 저장, DB에 원본/저장명 기록
+- **마이페이지**
+  - 개인정보 수정
 - **도움말**
   - `README.md` 파일을 동적으로 읽어 HTML로 변환하여 표시
 - **미들웨어**
@@ -50,6 +52,8 @@ src/
       detail/       # 게시글 상세, 좋아요, 삭제
       write/        # 글쓰기/수정 폼, 액션
     member/         # 회원가입, 로그인, 로그아웃, 인증
+    mypage/         
+      myinfo/       # 개인정보 수정
     guide/          # 도움말 페이지
     api/
       file/         # 파일 다운로드 API
