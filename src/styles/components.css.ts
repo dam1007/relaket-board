@@ -359,7 +359,7 @@ export const tableColTh = style({
     borderBottom: `1px solid ${vars.color.border}`,
     padding: '10px',
     fontWeight: '500',
-    textAlign: 'left',
+    textAlign: 'center',
     backgroundColor: vars.color.bg,
 });
 
@@ -368,6 +368,7 @@ export const tableColTd = style({
     borderBottom: `1px solid ${vars.color.border}`,
     padding: '10px',
     fontWeight: '400',
+    textAlign: 'center',
 });
 
 export const tableEmptyList = style({

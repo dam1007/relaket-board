@@ -81,7 +81,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
                 </colgroup>
                 <thead>
                     <tr>
-                        <th className={tableColTh}>No.</th>
+                        <th className={tableColTh}>No</th>
                         <th className={tableColTh}>제목</th>
                         <th className={tableColTh}>조회수</th>
                         <th className={tableColTh}>좋아요</th>
@@ -102,7 +102,6 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
                             <Link 
                                 href={`/board/detail?id=${post.id}`} 
                                 className={`${ellipsisOneLine} ${hoverUnderline}`} 
-                                style={{ width: '90%' }}
                             >
                                 {post.title}
                             </Link>
@@ -147,7 +146,7 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
             <div className={flex({ type: 'end_start' })}>
                 <Link 
                     href={'/board/write'} 
-                    className={`${button({ type: 'primary', size: 'medium' })}`} 
+                    className={button({ type: 'primary', size: 'medium' })} 
                     style={{ marginTop: '30px' }}
                 >
                     글쓰기
