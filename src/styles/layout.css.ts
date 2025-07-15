@@ -7,22 +7,6 @@ globalStyle('.container', {
 globalStyle('.inner', {
     maxWidth: '1280px',
     margin: '0 auto',
+    padding: '0 15px',
 });
 
-globalStyle('.member_wrapper', {
-    minHeight: 'calc(100vh - 64px)',
-    padding: '120px 0 0',
-    backgroundColor: 'rgba(250, 250, 250)'
-});
-
-globalStyle('.board_wrapper', {
-    minHeight: 'calc(100vh - 64px)',
-    padding: '100px 0 120px',
-    backgroundColor: 'white'
-});
-
-globalStyle('.mypage_wrapper', {
-    minHeight: 'calc(100vh - 64px)',
-    padding: '120px 0 0',
-    backgroundColor: 'white'
-});

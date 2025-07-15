@@ -59,8 +59,15 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
 
     return (
         <>
-            <div className={flex({ type: 'end_center' })} style={{ gap: '4px', marginBottom: '20px' }}>
-                <SearchForm type={type} keyword={keyword} sort={sort} />
+            <div 
+                className={flex({ type: 'end_center' })} 
+                style={{ gap: '4px', marginBottom: '20px' }}
+            >
+                <SearchForm 
+                    type={type} 
+                    keyword={keyword} 
+                    sort={sort} 
+                />
             </div>
             <table className={tableCol}>
                 <caption>리스트 목록</caption>
@@ -83,51 +90,74 @@ export default async function Page({ searchParams }: { searchParams: Promise<{ p
                     </tr>
                 </thead>
                 <tbody>
-                    {posts.length > 0 ? posts.map((post, idx) => (
-                        <tr key={post.id}>
-                            {/* No */}
-                            <td className={tableColTd}>
-                                {totalCount - ((pageNum - 1) * pageSize + idx)}
-                            </td>
-                            
-                            {/* 제목 */}
-                            <td className={tableColTd}>
-                                <Link 
-                                    href={`/board/detail?id=${post.id}`} 
-                                    className={`${ellipsisOneLine} ${hoverUnderline}`} 
-                                    style={{ width: '90%' }}
-                                >
-                                    {post.title}
-                                </Link>
-                            </td>
+                {posts.length > 0 ? posts.map((post, idx) => (
+                    <tr key={post.id}>
+                        {/* No */}
+                        <td className={tableColTd}>
+                            {totalCount - ((pageNum - 1) * pageSize + idx)}
+                        </td>
+                        
+                        {/* 제목 */}
+                        <td className={tableColTd}>
+                            <Link 
+                                href={`/board/detail?id=${post.id}`} 
+                                className={`${ellipsisOneLine} ${hoverUnderline}`} 
+                                style={{ width: '90%' }}
+                            >
+                                {post.title}
+                            </Link>
+                        </td>
 
-                            {/* 조회수 */}
-                            <td className={tableColTd}>{post.view_count ?? 0}</td>
+                        {/* 조회수 */}
+                        <td className={tableColTd}>
+                            {post.view_count ?? 0}
+                        </td>
 
-                            {/* 좋아요 */}
-                            <td className={tableColTd}>
-                                <span>{post.like_count ?? 0}</span>
-                            </td>
+                        {/* 좋아요 */}
+                        <td className={tableColTd}>
+                            <span>
+                                {post.like_count ?? 0}
+                            </span>
+                        </td>
 
-                            {/* 댓글수 */}
-                            <td className={tableColTd}>{post.comment_count ?? 0}</td>
+                        {/* 댓글수 */}
+                        <td className={tableColTd}>
+                            {post.comment_count ?? 0}
+                        </td>
 
-                            {/* 등록일 */}
-                            <td className={tableColTd}>
-                                <span>{post.created_at?.toISOString().slice(0, 10) ?? ''}</span>
-                            </td>
-                        </tr>
-                    )) : (
-                        <tr>
-                            <td className={tableEmptyList} colSpan={6}>게시물이 없습니다.</td>
-                        </tr>
-                    )}
+                        {/* 등록일 */}
+                        <td className={tableColTd}>
+                            <span>
+                                {post.created_at?.toISOString().slice(0, 10) ?? ''}
+                            </span>
+                        </td>
+                    </tr>
+                )) : (
+                    <tr>
+                        <td 
+                            className={tableEmptyList} 
+                            colSpan={6}
+                        >
+                            게시물이 없습니다.
+                        </td>
+                    </tr>
+                )}
                 </tbody>
             </table>
             <div className={flex({ type: 'end_start' })}>
-                <Link href={'/board/write'} className={`${button({ type: 'primary', size: 'medium' })}`} style={{ marginTop: '30px' }}>글쓰기</Link>
+                <Link 
+                    href={'/board/write'} 
+                    className={`${button({ type: 'primary', size: 'medium' })}`} 
+                    style={{ marginTop: '30px' }}
+                >
+                    글쓰기
+                </Link>
             </div>
-            <Pagination totalPages={totalPages} currentPage={pageNum} basePath={basePathWithQuery} />
+            <Pagination 
+                totalPages={totalPages} 
+                currentPage={pageNum} 
+                basePath={basePathWithQuery} 
+            />
         </>
     );
 }

@@ -1,6 +1,12 @@
 import { vars } from "@/styles/global.css";
 import { style } from "@vanilla-extract/css";
 
+export const mypageWrapper = style({
+    minHeight: 'calc(100vh - 64px)',
+    padding: '120px 0 0',
+    backgroundColor: 'white'
+});
+
 // 마이페이지 타이틀
 export const myPageTitle = style({
     fontSize: '22px',
@@ -10,7 +16,7 @@ export const myPageTitle = style({
     borderBottom: `1px solid ${vars.color.black}`,
 });
 
-// 마이페이지 타이틀
+// 마이페이지 서브 타이틀
 export const myPageSubTitle = style({
     fontSize: '20px',
     fontWeight: '500',

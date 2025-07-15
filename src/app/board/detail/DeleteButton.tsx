@@ -1,4 +1,5 @@
 'use client';
+
 import { button } from '@/styles/components.css';
 import { deletePostAction } from './actions';
 

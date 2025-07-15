@@ -39,7 +39,13 @@ export default function WriteForm({ post, files, type }: { post: any, files: any
             <tr>
               <th className={tableRowTh}>제목</th>
               <td className={tableRowTd}>
-                <input type={'text'} name={'title'} className={InputText.input} required defaultValue={post?.title || ''} />
+                <input 
+                  type={'text'} 
+                  name={'title'} 
+                  className={InputText.input} 
+                  defaultValue={post?.title || ''}
+                  required
+                />
               </td>
             </tr>
             <tr>
@@ -55,9 +61,22 @@ export default function WriteForm({ post, files, type }: { post: any, files: any
                 {remainFiles.length > 0 && (
                   <ul style={{marginTop: '8px'}}>
                     {remainFiles.map(file => (
-                      <li key={file.id} style={{display: 'flex', alignItems: 'center', gap: '8px'}}>
-                        <a href={file.file_path} target="_blank" rel="noopener noreferrer">{file.file_name}</a>
-                        <button type="button" onClick={() => handleDeleteFile(file.id)} style={{color: 'red', border: 'none', background: 'none', cursor: 'pointer'}}>삭제</button>
+                      <li 
+                        key={file.id} 
+                        style={{display: 'flex', alignItems: 'center', gap: '8px'}}
+                      >
+                        <a 
+                          href={file.file_path} 
+                          target="_blank" 
+                          rel="noopener noreferrer">
+                          {file.file_name}
+                        </a>
+                        <button type="button"  
+                          style={{color: 'red', border: 'none', background: 'none', cursor: 'pointer'}}
+                          onClick={() => handleDeleteFile(file.id)}
+                        >
+                          삭제
+                        </button>
                       </li>
                     ))}
                   </ul>
@@ -67,8 +86,16 @@ export default function WriteForm({ post, files, type }: { post: any, files: any
           </tbody>
         </table>
         <div className={buttonWrapRight} style={{marginTop: '30px', gap: '10px'}}>
-          <Link href={'/board/list'} className={button({type: 'white', size: 'large'})}>목록</Link>
-          <button type="submit" className={button({type: 'primary', size: 'large'})}>
+          <Link 
+            href={'/board/list'} 
+            className={button({type: 'white', size: 'large'})}
+          >
+            목록
+          </Link>
+          <button 
+            type="submit" 
+            className={button({type: 'primary', size: 'large'})}
+          >
             {type !== 'update' ? '등록' : '수정'}
           </button>
         </div>

@@ -38,32 +38,43 @@ export default async function Page({ searchParams }: DetailProps) {
                 <div className={board.writeBoxHeader}>
                     <h3 className={board.writeBoxTitle}>{post.title}</h3>
                     <div className={board.writeBoxInfoWrap}>
-                      <ul className={board.writeBoxInfoList}>
-                        <li className={`${board.writeBoxInfoListItem} ${board.seperate}`}>
-                          <span>{'작성자'}</span>
-                          <span className={board.writeBoxUserIP}>({'IP'})</span>
-                        </li>
-                        <li className={board.writeBoxInfoListItem}>
-                          <span className={board.writeBoxRegistDate}>{post.created_at?.toISOString().slice(0, 10) ?? ''}</span>
-                          <span className={board.writeBoxRegistDate}>{'등록시간 데이터'}</span>
-                        </li>
-                      </ul>
-                      <ul className={board.writeBoxInfoList}>
-                        <li className={`${board.writeBoxInfoListItem}`}>
-                          조회수 <b className={board.writeBoxInfoListCount}>{0}</b>
-                        </li>
-                        <li className={`${board.writeBoxInfoListItem}`}>
-                          좋아요 <b className={board.writeBoxInfoListCount}>{0}</b>
-                        </li>
-                        <li className={`${board.writeBoxInfoListItem}`}>
-                          댓글 <b className={board.writeBoxInfoListCount}>{0}</b>
-                        </li>
-                      </ul>
+                        <ul className={board.writeBoxInfoList}>
+                            <li className={`${board.writeBoxInfoListItem} ${board.seperate}`}>
+                                <span>
+                                    {'작성자'}
+                                </span>
+                                <span className={board.writeBoxUserIP}>
+                                    ({'IP'})
+                                </span>
+                            </li>
+                            <li className={board.writeBoxInfoListItem}>
+                                <span className={board.writeBoxRegistDate}>
+                                    {post.created_at?.toISOString().slice(0, 10) ?? ''}
+                                </span>
+                                <span className={board.writeBoxRegistDate}>
+                                    {'등록시간 데이터'}
+                                </span>
+                            </li>
+                        </ul>
+                        <ul className={board.writeBoxInfoList}>
+                            <li className={`${board.writeBoxInfoListItem}`}>
+                                조회수 <b className={board.writeBoxInfoListCount}>{0}</b>
+                            </li>
+                            <li className={`${board.writeBoxInfoListItem}`}>
+                                좋아요 <b className={board.writeBoxInfoListCount}>{0}</b>
+                            </li>
+                            <li className={`${board.writeBoxInfoListItem}`}>
+                                댓글 <b className={board.writeBoxInfoListCount}>{0}</b>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-                <div className={board.writeBoxBody}>
+                <div>
                     <div className={board.writeBoxTextWrap}>
-                        <div dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize((post.content).toString()) }}></div>
+                        <div dangerouslySetInnerHTML={{ 
+                                __html: DOMPurify.sanitize((post.content).toString()) 
+                            }}>
+                        </div>
                     </div>
                     {files.length > 0 && (
                         <dl className={board.writeBoxFileWrap}>
@@ -71,7 +82,13 @@ export default async function Page({ searchParams }: DetailProps) {
                             <dd>
                                 {files.map(file => (
                                     <div key={file.id}>
-                                        <Link href={`/api/file/${file.id}/download`} className={hoverUnderline} download>{file.file_name}</Link>
+                                        <Link 
+                                            href={`/api/file/${file.id}/download`} 
+                                            className={hoverUnderline} 
+                                            download
+                                        >
+                                            {file.file_name}
+                                        </Link>
                                     </div>
                                 ))}
                             </dd>
@@ -80,20 +97,44 @@ export default async function Page({ searchParams }: DetailProps) {
                 </div>
             </div>
             <div style={{ margin: '20px 0', textAlign: 'right' }}>
-                <LikeButton postId={post.id} initialCount={post.like_count ?? 0} isLoggedIn={!!loginUser} userId={loginUser?.userId} size={'large'} />
+                <LikeButton 
+                    postId={post.id} 
+                    initialCount={post.like_count ?? 0} 
+                    isLoggedIn={!!loginUser} 
+                    userId={loginUser?.userId} 
+                    size={'large'} 
+                />
             </div>
-            <div className={buttonWrapRight} style={{ marginTop: '20px', gap: '10px' }}>
-                <Link href={'/board/list'} className={button({ type: 'white', size: 'large' })}>목록</Link>
+            <div 
+                className={buttonWrapRight} 
+                style={{ marginTop: '20px', gap: '10px' }}
+            >
+                <Link 
+                    href={'/board/list'} 
+                    className={button({ type: 'white', size: 'large' })}>
+                    목록
+                </Link>
                 {isOwner && (
                     <>
-                        <Link href={`/board/write?type=update&id=${post.id}`} className={button({ type: 'primary', size: 'large' })}>수정</Link>
+                        <Link 
+                            href={`/board/write?type=update&id=${post.id}`} 
+                            className={button({ type: 'primary', size: 'large' })}
+                        >
+                            수정
+                        </Link>
                         <DeleteButton postId={post.id} />
                     </>
                 )}
             </div>
             
             {/* 댓글영역 */}
-            <Comment postId={post.id} initialCount={post.like_count ?? 0} loginUser={loginUser} isLoggedIn={!!loginUser} userId={loginUser?.userId} />
+            <Comment 
+                postId={post.id} 
+                initialCount={post.like_count ?? 0} 
+                loginUser={loginUser} 
+                isLoggedIn={!!loginUser} 
+                userId={loginUser?.userId}
+            />
         </>
     );
 };

@@ -72,7 +72,12 @@ export default function page() {
                     </table>
                 </div>
                 <div className={styles.buttonWrapRight} style={{marginTop: '30px'}}>
-                    <button type="button" className={styles.button({type: 'black', size: 'large'})}>수정</button>
+                    <button 
+                        type="button" 
+                        className={styles.button({type: 'black', size: 'large'})}
+                    >
+                        수정
+                    </button>
                 </div>
             </form>
         </section>

@@ -24,7 +24,7 @@ export const headerInner = style({
     justifyContent: 'space-between',
     alignItems: 'center',
     flexWrap: 'nowrap',
-    padding: '15px 0',
+    padding: '15px',
     margin: '0 auto',
 });
 

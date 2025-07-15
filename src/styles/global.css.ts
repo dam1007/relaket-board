@@ -1,3 +1,5 @@
+// 초기화 세팅
+
 import { globalStyle, createGlobalTheme } from '@vanilla-extract/css';
 
 globalStyle('html, body', {

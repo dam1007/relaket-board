@@ -1,6 +1,12 @@
 import { style } from "@vanilla-extract/css";
 import { vars } from "@/styles/global.css";
 
+export const boardWrapper = style({
+    minHeight: 'calc(100vh - 64px)',
+    padding: '100px 0 120px',
+    backgroundColor: 'white'
+});
+
 // s: 게시판 입력 영역
 export const writeBox = style({
     borderTop: `1px solid ${vars.color.border}`,
@@ -50,6 +56,7 @@ export const writeBoxInfoListItem = style({
     color: vars.color.gray666,
 });
 
+// 구분선
 export const seperate = style({
     position: 'relative',
     ':after': {
@@ -77,9 +84,6 @@ export const writeBoxRegistDate = style({
     color: vars.color.gray666,
 });
 
-export const writeBoxBody = style({
-});
-
 export const writeBoxTextWrap = style({
     padding: '20px 15px',
     minHeight: '800px',
@@ -100,6 +104,7 @@ export const writeBoxFileTitle = style({
     fontWeight: '500'
 });
 // e: 게시판 입력 영역
+
 
 // s: 댓글 영역
 export const commentArea = style({
@@ -148,7 +153,6 @@ export const commentHeader = style({
     flexWrap: 'nowrap',
     
 });
-
 
 export const commentDesc = style({
     fontSize: '14px',

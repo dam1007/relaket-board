@@ -34,10 +34,26 @@ export default function Page() {
             />
           </div>
           <div className={inputWrap}>
-            <InputText type={'password'} name={'password'} id={'password'} label={'비밀번호'} placeholder={''} required />
+            <InputText 
+              type={'password'} 
+              name={'password'} 
+              id={'password'} 
+              label={'비밀번호'} 
+              placeholder={''}
+              required 
+            />
           </div>
-          {state?.error && <p style={{ color: 'red', marginTop: '10px' }}>{state.error}</p>}
-          <button type="submit" className={button({ type: 'primary', size: 'full' })} style={{ marginTop: '30px' }}>
+          {state?.error 
+          && 
+          <p style={{ color: 'red', marginTop: '10px' }}>
+            {state.error}
+          </p>
+          }
+          <button 
+            type="submit" 
+            className={button({ type: 'primary', size: 'full' })} 
+            style={{ marginTop: '30px' }}
+          >
             로그인
           </button>
         </form>

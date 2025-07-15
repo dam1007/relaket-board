@@ -1,6 +1,12 @@
 import { vars } from "@/styles/global.css";
 import { style } from "@vanilla-extract/css";
 
+export const memberWrapper = style({
+    minHeight: 'calc(100vh - 64px)',
+    padding: '120px 0 0',
+    backgroundColor: 'rgba(250, 250, 250)'
+});
+
 export const memberBox = style({
     display: 'flex',
     flexDirection: 'column',
@@ -38,7 +44,8 @@ export const loginDesc = style({
     color: 'black'
 });
 
-// 가입완료
+
+// s: 가입완료
 export const joinEndDescWrap = style({
     display: 'flex',
     flexDirection: 'column',
@@ -63,3 +70,4 @@ export const notice = style({
     color: vars.color.gray666,
     padding: '5px 10px',
 });
+// e: 가입완료

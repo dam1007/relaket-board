@@ -71,7 +71,12 @@ export default function Page() {
                             defaultValue={state.fields?.userEmail}
                         />
                     </div>
-                    {state?.error && <p style={{ color: 'red', marginTop: '10px' }}>{state.error}</p>}
+                    {state?.error 
+                    &&
+                    <p style={{ color: 'red', marginTop: '10px' }}>
+                        {state.error}
+                    </p>
+                    }
                     <button 
                         type="submit" 
                         className={button({ type: 'primary', size: 'full' })} 
