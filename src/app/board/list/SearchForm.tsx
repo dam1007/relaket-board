@@ -42,7 +42,7 @@ export default function SearchForm({ type, keyword, sort }: { type: string, keyw
         <option value="new">최신순</option>
         <option value="old">오래된순</option>
         <option value="view_count">조회수순</option>
-        <option value="like">인기순</option>
+        <option value="like">좋아요순</option>
         <option value="comment_count">댓글순</option>
       </select>
       <button type="submit" className={searchBoxButton}>검색</button>

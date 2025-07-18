@@ -26,7 +26,7 @@ globalStyle(
     time, mark, audio, video`, 
     {
         fontFamily: 'var(--font-noto-sans-kr), var(--font-roboto)',
-        fontSize: '14px',
+        fontSize: 'inherit',
         fontWeight: '400',
         letterSpacing: '-0.4px',
         lineHeight: '1.4',

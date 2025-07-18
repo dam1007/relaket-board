@@ -473,3 +473,37 @@ export const ellipsisOneLine = style({
     textOverflow: 'ellipsis',
     overflow: 'hidden',
 });
+
+export const utilWrap = style({
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: '10px',
+    marginBottom: '10px',
+});
+
+// 총 카운트
+export const totalCountWrap = style({
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    gap: '10px',
+    marginBottom: '10px',
+});
+
+export const totalCount = style({
+    display: 'inline-flex',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    flexWrap: 'nowrap',
+    gap: '4px',
+    fontSize: '16px',
+});
+
+export const count = style({
+    fontWeight: '500',
+});
+
+
