@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import * as styles from './Header.css'
-import { button } from '@/styles/components.css';
+import { button, flex} from '@/styles/components.css';
 import { getCurrentUser } from '@/lib/auth';
 import UserMenu from './UserMenu';
 import Search from './Search';
@@ -16,7 +16,10 @@ export default async function Header() {
                     <Link href="/board/list" className={styles.gnbNavLink}>게시판</Link>
                     <Link href="/about" className={styles.gnbNavLink}>프로젝트소개</Link>
                 </nav>
-                <div>
+                <div 
+                    className={flex({type: 'start_start'})}
+                    style={{gap: '10px'}}
+                >
                     <Search />
                     <nav className={styles.joinNav}>
                         {user ? (

@@ -19,7 +19,7 @@ export default function SearchForm({ type, keyword, sort }: { type: string, keyw
       <select 
         name="type" 
         className={select} 
-        style={{ flexShrink: '0', width: '90px' }} 
+        style={{ flexShrink: '0', }} 
         defaultValue={type}
       >
         <option value="">전체</option>
