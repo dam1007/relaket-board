@@ -36,7 +36,7 @@ export default function SearchForm({ type, keyword, sort }: { type: string, keyw
       <select 
         name="sort" 
         className={select} 
-        style={{ flexShrink: '0', width: '90px' }}
+        style={{ flexShrink: '0' }}
         defaultValue={sort}
       >
         <option value="new">최신순</option>

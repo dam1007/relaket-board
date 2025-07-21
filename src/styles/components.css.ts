@@ -128,7 +128,7 @@ export const button = recipe({
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: '16px',
                 backgroundPosition: 'center',
-                boxShadow: '0 -2px 2px rgba(0,0,0,0.1)',
+                boxShadow: '0 -1px 2px rgba(0,0,0,0.1)',
                 ':hover': {
                     backgroundColor: vars.color.hoverBg,
                 },
@@ -146,7 +146,7 @@ export const button = recipe({
                 backgroundRepeat: 'no-repeat',
                 backgroundSize: '16px',
                 backgroundPosition: 'center',
-                boxShadow: '0 2px 2px rgba(0,0,0,0.1)',
+                boxShadow: '0 1px 2px rgba(0,0,0,0.1)',
                 ':hover': {
                     backgroundColor: vars.color.hoverBg,
                 }
